@@ -85,7 +85,7 @@
 .box{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     gap: 1rem;
     border-radius: 50px;
     padding: 2rem;
@@ -114,9 +114,8 @@
     }
 
     && .innerbox{
-
-        border-radius: 50px;
         width: 100%;
+        border-radius: 50px;
         overflow: hidden;
 
         && video{
@@ -211,5 +210,11 @@
                 padding: 1.5rem;
             }
         }
+    }
+    .box{
+        height: 70vh;
+    }
+    .box .innerbox{
+        width: 40%;
     }
 }

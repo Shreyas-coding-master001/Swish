@@ -6,16 +6,27 @@ import firstGIF from "../assets/FirstGIF.gif";
 import coolEffect1 from "../assets/Image1.webp";
 import coolEffect2 from "../assets/Image2.webp";
 import blank from "../assets/blank.webp";
+import { useState,useEffect  } from "react";
 
 function LandingPage(){
+    let [flag,setflag] = useState(false);
+
+    useEffect(function(){
+        console.log("hello");
+    },[flag]);
+
+    function JoinButton(){
+        setflag(prev=>!prev);
+    }
+
     return <div className="LandingPage">
         <div id="NavBar">
             <div className="Title">
-                <img src="" alt="" />
+                {/* <img src="" alt="" /> */}
                 <h2>Swish</h2>
             </div>
             <nav>
-                <button>Join</button>
+                <button onClick={JoinButton}>Join</button>
             </nav>
         </div>
         <div className="MainLandingPage">
