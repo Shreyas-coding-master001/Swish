@@ -1,15 +1,18 @@
 import { useState } from 'react'
 import LandingPage from './Components/LandingPage'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import HomePage from './Components/HomePage'
 import './App.css'
+import {Routes, Route} from 'react-router-dom'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <main>
-      <LandingPage />
+      <Routes>
+        <Route path='/' element={<LandingPage />} />
+        <Route path='/home' element={<HomePage />}/>
+      </Routes>
     </main>
   )
 }

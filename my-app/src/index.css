@@ -30,13 +30,7 @@ html,body{
 
 html{
   font-size: clamp(14px,2vw,18px);
-  background: linear-gradient(
-    to bottom,
-    black 1%,
-    darkblue ,
-    blue ,
-    royalblue
-  );
+  background-color: rgba(0, 0, 0, 0.796);;
 }
 
 

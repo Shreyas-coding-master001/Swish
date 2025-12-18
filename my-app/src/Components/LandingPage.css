@@ -1,7 +1,29 @@
+@keyframes MoveUpCenter{
+    from{
+        top: 0;
+        right: 0;
+        opacity: 0;
+    } 
+    to{
+        top: 50%;
+        left: 50%;
+        opacity: 1;
+        transform: translate(-50%,-50%);
+    }
+}
+
+
 .LandingPage{
     width: 100%;
     height: 100%;
-    padding: 0 1rem;
+    padding: 0.1rem;
+    background: linear-gradient(
+    to bottom,
+    black 1%,
+    darkblue ,
+    blue ,
+    royalblue
+  );
 }
 
 .LandingPage #NavBar{
@@ -146,6 +168,32 @@
         background-color:#121DF7;
     }
 }
+
+.LandingPage .JoinSection{
+    position: absolute;
+    height: 40vh;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    padding: 1rem;
+    opacity: 0;
+    border-radius: 10px;
+    background-color: darkblue;
+    animation: MoveUpCenter 1s linear forwards;
+}
+
+.LandingPage .JoinSection button{
+    color: black;
+    padding: 0.5rem;
+    border-radius: 50px;
+}
+
+.LandingPage .Disable{
+    display: none;
+}
+
 
 @media (min-width: 767px){
     .LandingPage #NavBar{
