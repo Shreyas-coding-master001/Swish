@@ -8,33 +8,31 @@ import coolEffect2 from "../assets/Image2.webp";
 import blank from "../assets/blank.webp";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import SignUp from "../pages/auth/SignUp"
+import SignIn from "../pages/auth/SignIn"
 
 function LandingPage(){
-    const navigate = useNavigate();
+    
     const [visible, setVisible] = useState(false);
+    const[open,setOpen] = useState(false);
 
-
-    function JoinButtonClicked(){
-        setVisible(prev=>!prev);
+    function displaySignup(){
+        setOpen(prev => !prev);
     }
-
-    function JoinButton(){
-        navigate("/home");
-    }
+    
+ 
+    
 
     return <div className="LandingPage">
-        <form className={`${visible?"JoinSection":"Disable"}`} type="submit" onSubmit={JoinButton}>
-            <h3>Join Community</h3>
-            <input type="text" name="username" placeholder="Enter your username..."/>
-            <button>Join</button>
-        </form>
+        {open && <SignUp/>}
         <div id="NavBar">
             <div className="Title">
                 {/* <img src="" alt="" /> */}
                 <h2>Swish</h2>
             </div>
             <nav>
-                <button onClick={JoinButtonClicked}>Join</button>
+                {/* <button onClick={JoinButtonClicked}>Join</button> */}
+                <button onClick={displaySignup}>Join</button>
             </nav>
         </div>
         <div className="MainLandingPage" >
