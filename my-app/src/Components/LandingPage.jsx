@@ -20,8 +20,6 @@ function LandingPage(){
         setOpen(prev => !prev);
     }
     
- 
-    
 
     return <div className="LandingPage">
         {open && <SignUp/>}
