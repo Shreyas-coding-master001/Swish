@@ -13,7 +13,7 @@
 }
 
 
-.LandingPage{
+/* .LandingPage{
     width: 100%;
     height: 100%;
     padding: 0.1rem;
@@ -24,6 +24,25 @@
     blue ,
     royalblue
   );
+} */
+
+
+.LandingPage{
+    position: fixed;          /* 🔥 REQUIRED */
+    inset: 0;                 /* 🔥 REQUIRED */
+    width: 100vw;
+    height: 100vh;
+    padding: 0.1rem;
+
+    background: linear-gradient(
+        to bottom,
+        black 1%,
+        darkblue,
+        blue,
+        royalblue
+    );
+
+    overflow-y: auto;         /* keep scrolling */
 }
 
 .LandingPage #NavBar{
