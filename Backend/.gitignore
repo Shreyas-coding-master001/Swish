@@ -33,6 +33,8 @@ node_modules/
 
 # Env
 .env
+Backend/.env
+
 
 # Build
 dist/
