@@ -1,0 +1,63 @@
+.HomeSection{
+    height: 100%;
+    width: 100%;
+}
+
+.HomeSection #SectionChanging{
+    height: 90%;
+    width: 10%;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    border-right: 3px solid whitesmoke;
+    anchor-name: --backgroundChange;
+    position: relative;
+    z-index: 4;
+}
+
+.HomeSection #Main_Navigation{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 10%;
+    background-color: blueviolet;
+    padding: 2rem;
+}
+
+.target{
+    background-color: rgba(128, 128, 128, 0.8);
+    position: absolute;
+    z-index: 3;
+    position-anchor: var(--backgroundChange);
+    top: anchor(--backgroundChange top);
+    left: anchor(--backgroundChange left);
+    right: anchor(--backgroundChange right);
+    bottom: anchor(--backgroundChange bottom);
+    transition: all linear 0.2s;
+    pointer-events: none;
+}
+
+#Main_Navigation .One{
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+#SectionChanging h3:hover{
+    anchor-name: --backgroundChange;
+    padding: 2rem;
+    cursor: pointer;
+}
+
+.One input{
+    padding: 0.3rem;
+    color: black;
+    border-radius: 50px;
+}
+
+.One label{
+    border: 2px solid white;
+    padding: 0.2rem;
+    border-radius: 50%;
+}

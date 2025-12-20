@@ -30,7 +30,7 @@ function LandingPage(){
         </form>
         <div id="NavBar">
             <div className="Title">
-                {/* <img src="" alt="" /> */}
+                {/* <img src="" alt="Logo" /> */}
                 <h2>Swish</h2>
             </div>
             <nav>
