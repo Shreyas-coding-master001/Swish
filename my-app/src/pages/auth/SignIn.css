@@ -1,0 +1,238 @@
+.signin-background {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signin-container {
+    display: flex;
+    flex-direction: row;
+    height: 540px;
+    width: 700px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.left-section-signin {
+    width: 350px;
+    position: relative;
+    overflow: hidden;
+}
+
+.image-wrapper-signin {
+  width: 350px;
+  height: 540px;
+  position: relative;
+  overflow: hidden;
+}
+
+.campus-image-signin {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.spotlight-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.25); 
+  pointer-events: none;
+
+  -webkit-mask-image: radial-gradient(
+    circle 120px at var(--x) var(--y),
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,0) 40%,
+    rgba(0,0,0,1) 70%
+  );
+
+  mask-image: radial-gradient(
+    circle 120px at var(--x) var(--y),
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,0) 40%,
+    rgba(0,0,0,1) 70%
+  );
+}
+
+.right-section-signin {
+    width: 350px;
+    background-color: #ffffff;
+    padding: 20px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-signin {
+    text-align: center;
+    align-content: center;
+    background-color: #000064;
+    color: white;
+    height: 50px;
+    width: 100px;
+    margin-left: 208px;
+    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 30px;
+    border-radius: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    display: block;
+    letter-spacing: 1px;
+}
+
+.email-title-signin,
+.password-title-signin {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 6px;
+    margin-top: 16px;
+}
+
+.email-title-signin {
+    margin-top: 0;
+}
+
+.email-input-signin,
+.password-input-signin {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #374151;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.email-input-signin:focus,
+.password-input-signin:focus {
+    outline: none;
+    border-color: #000064;
+    box-shadow: 0 0 0 3px rgba(0, 0, 100, 0.1);
+}
+
+.email-input-signin::placeholder,
+.password-input-signin::placeholder {
+    color: #9ca3af;
+}
+
+.password-input-signin {
+    font-family: inherit;
+}
+
+.forgot-password-title-signin {
+    font-size: 13px;
+    color: #000064;
+    margin-top: 8px;
+    margin-bottom: 0;
+    cursor: pointer;
+    text-align: right;
+    transition: color 0.3s ease;
+}
+
+.forgot-password-title-signin:hover {
+    color: #000080;
+    text-decoration: underline;
+}
+
+.bottom-section-signin {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 20px;
+}
+
+.account-title-signin {
+    color: #374151;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    width: 400px;
+}
+
+.signup-link {
+    color: #000064;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.signup-link:hover {
+    color: #000080;
+    text-decoration: underline;
+}
+
+.signin-button {
+    background-color: #000064;
+    color: white;
+    border: none;
+    padding: 12px 10px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 100px;
+}
+
+.signin-button:hover {
+    background-color: #000080;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 100, 0.2);
+}
+
+.signin-button:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+    .signin-container {
+        width: 90%;
+        height: auto;
+        flex-direction: column;
+    }
+
+    .left-section-signin,
+    .right-section-signin {
+        width: 100%;
+    }
+
+    .left-section-signin {
+        display: none;
+    }
+
+    .campus-image-signin {
+        height: 200px;
+        width: 100%;
+    }
+
+    .logo-signin {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.right-section-signin {
+    position: relative;
+}
+
+.email-input-signin:focus-visible,
+.password-input-signin:focus-visible,
+.signin-button:focus-visible {
+    outline: 2px solid #000064;
+    outline-offset: 2px;
+}
