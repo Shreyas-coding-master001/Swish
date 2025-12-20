@@ -1,6 +1,7 @@
 .HomeSection{
     height: 100%;
     width: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.5),darkblue);
 }
 
 .HomeSection #SectionChanging{
@@ -11,9 +12,11 @@
     justify-content: space-around;
     flex-direction: column;
     border-right: 3px solid whitesmoke;
+    border-bottom: 3px solid whitesmoke;
     anchor-name: --backgroundChange;
     position: relative;
     z-index: 4;
+    
 }
 
 .HomeSection #Main_Navigation{
@@ -21,7 +24,7 @@
     align-items: center;
     justify-content: space-between;
     height: 10%;
-    background-color: blueviolet;
+    background-color: darkblue;
     padding: 2rem;
 }
 
@@ -38,16 +41,28 @@
     pointer-events: none;
 }
 
+.HomeSection #SectionChanging .LINKS{
+    text-decoration: none;
+}
+
 #Main_Navigation .One{
     display: flex;
     gap: 0.5rem;
     align-items: center;
 }
 
-#SectionChanging h3:hover{
+#SectionChanging .LINKS:hover{
     anchor-name: --backgroundChange;
     padding: 2rem;
     cursor: pointer;
+    scale: 1.2;
+    transition: all linear 0.5s;
+    color: aliceblue;
+}
+
+#SectionChanging:has(.LINKS:hover) .LINKS{
+    transform: scale(0.9);
+    transition: all linear 0.5s;
 }
 
 .One input{
@@ -56,8 +71,38 @@
     border-radius: 50px;
 }
 
+.One img{
+    width: 2.5rem;
+}
+
 .One label{
     border: 2px solid white;
     padding: 0.2rem;
     border-radius: 50%;
+}
+
+@media (max-width: 767px){
+    .HomeSection #SectionChanging{ 
+        height: 10%;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        position: fixed;
+        border-top: 3px solid whitesmoke;
+        border-bottom: none;
+        border-right: none;
+        bottom: 0;
+    }
+
+    .HomeSection #Main_Navigation{
+        padding: 0.4rem;
+    }
+
+    .One{
+        && i{
+            display: none;
+        }
+    }
+
 }
