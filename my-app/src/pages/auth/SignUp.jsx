@@ -11,12 +11,12 @@ function SignUp(){
 
 
     function handleImageUpload(e) {
-    const file = e.target.files[0];
-    if (!file) return;
+        const file = e.target.files[0];
+        if (!file) return;
 
-    const imageURL = URL.createObjectURL(file);
-    setProfileImage(imageURL);
-}
+        const imageURL = URL.createObjectURL(file);
+        setProfileImage(imageURL);
+    }
 
 
     const hideSignUp =() => {
@@ -45,7 +45,7 @@ function SignUp(){
                         <input className="confirm-password-input" placeholder="Confirm your password" required/>
                         <p className="role-title">Role</p>
                         <select className="role-input">
-                            <option>Students</option>
+                            <option>Student</option>
                             <option>Faculty</option>
                             <option>Alumni</option>
                             <option>Community member</option>
