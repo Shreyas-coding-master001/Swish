@@ -10,11 +10,12 @@
 
 // app.listen(port,()=>console.log(`Server is running at htttp://localhost:${port}`));
 
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const connectDB = require("./config/db");
-require("dotenv").config();
 const authRoutes = require("./routes/authRoutes");
+const path = require("path");
 
 const app = express()
 
