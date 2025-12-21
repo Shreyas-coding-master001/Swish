@@ -1,11 +1,12 @@
 const User = require("../models/User")
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken")
 
 const signup = async (req,res) => {
     try{
-        const{college, name, email, password, role } = req.body;
+        const{college, name, email, password } = req.body;
 
-        if(!college || !name || !email || !password || !role){
+        if(!college || !name || !email || !password){
             return res.status(400).json({
                 message: "Please fill all the required details"
             });
@@ -21,7 +22,7 @@ const signup = async (req,res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const newUser = new User({college,name,email,password: hashedPassword,role})
+        const newUser = new User({college,name,email,password: hashedPassword})
         
         await newUser.save();
 
@@ -56,8 +57,20 @@ const signin = async (req,res) => {
             });
         }
 
+        const token = jwt.sign(
+            {
+                id: user._id,
+                email: user.email
+            },
+            process.env.JWT_SECRET,
+            {
+                expiresIn: "1d"
+            }
+        );
+
         res.status(200).json({
             message: "Login Successful",
+            token,
             user:{
                 id: user._id,
                 college: user.college,
