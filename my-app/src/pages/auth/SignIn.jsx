@@ -2,21 +2,49 @@ import { useState } from "react";
 import "./SignIn.css"
 import SignUp from "./SignUp";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function SignIn(){
-  const navigate = useNavigate();
+    const navigate = useNavigate();
     const[signup,setSignUp] = useState(false);
     const[displaySignIn,setDisplaySignIn] = useState(true);
-
+    const [email,setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error,setError] = useState("");
+    const [loading, setLoading] = useState(false);
+ 
     const hideSignIn = () => {
         setDisplaySignIn(false);
         setSignUp(true);
 
     }
 
-    function JoinButton(){
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      setError("");
+      try{
+        setLoading(true);
+        const response = await axios.post(
+          "http://localhost:9000/api/auth/signin",
+          {email, password}
+        );
+
+        const {token, user } = response.data;
+
+        localStorage.setItem("token", token);
+        localStorage.setItem("user",JSON.stringify(user));
+        setLoading(false);
         navigate("/home");
-    }
+      } catch (err){
+        if(err.response && err.response.data.message){
+          setLoading(false);
+          setError(err.response.data.message);
+        } else {
+          setLoading(false);
+          setError("Something went wrong. Please try again.")
+        }
+      }
+    };
 
     return <div className="signin-background">
         {signup && <SignUp/>}
@@ -38,19 +66,20 @@ function SignIn(){
 
           <div className="spotlight-overlay"></div>
         </div>
-
-
                 <div className="right-section-signin">
+                  <form onSubmit={handleSubmit}>
                     <p className="logo-signin">Swish</p>
                     <p className="email-title-signin">Campus email</p>
-                    <input className="email-input-signin" placeholder="Enter your email"/>
+                    <input type="email" value = {email} onChange={(e) => setEmail(e.target.value)} required className="email-input-signin" placeholder="Enter your email"/>
                     <p className="password-title-signin">Password</p>
-                    <input className="password-input-signin" placeholder="Enter your passord"/>
+                    <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} required className="password-input-signin" placeholder="Enter your passord"/>
                     <p className="forgot-password-title-signin">Forgot Password?</p>
                     <div className="bottom-section-signin">
                         <p className="account-title-signin">Not a swish member? <span className="signup-link" onClick={hideSignIn}>Sign up</span></p>
-                        <button className="signin-button" onClick={JoinButton}>SignIn</button>
+                        <button type="submit" className="signin-button">{loading ? "Signing in..." : "Sign In"}</button>
                     </div>
+                  </form>
+                  {error && <p className="error-text">{error}</p>}
                 </div>
             </div>
         }
