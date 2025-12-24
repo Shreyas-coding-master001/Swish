@@ -2,7 +2,7 @@ import "./HomePage.css";
 import { Routes,Route } from "react-router-dom";
 import Logo from "../assets/Logo-removebg-preview.png";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,Outlet } from "react-router-dom";
 
 function HomePage(){
     const [clicked,setClicked] = useState("false"); 
@@ -19,13 +19,14 @@ function HomePage(){
             </div>
         </nav>
         <nav id="SectionChanging">
-            <Link to="/home" className="LINKS">Home</Link>
+            <Link to="" className="LINKS">Home</Link>
+            <Link to="profile" className="LINKS">Profile</Link>
             <Link className="LINKS">About</Link>
             <Link className="LINKS">Contact</Link>
         </nav>
         <div className="target"></div>
-        <section id="UserInteraction">
-            
+         <section id="UserInteraction">
+            <Outlet />
         </section>
         
     </div>);
