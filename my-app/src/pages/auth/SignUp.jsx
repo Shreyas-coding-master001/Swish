@@ -38,7 +38,7 @@ function SignUp() {
     }
 
     try {
-      await axios.post("http://localhost:9000/api/auth/signup", 
+      await axios.post("http://localhost:3000/api/auth/signup", 
         {college,name,email,password,role}
     );
       setLoading(false);
@@ -88,10 +88,10 @@ function SignUp() {
 
                 <p className="role-title">Role</p>
                 <select value={role} onChange={(e) => setRole(e.target.value)} className="role-input" >
-                  <option value="student">Student</option>
-                  <option value="faculty">Faculty</option>
-                  <option value="alumni">Alumni</option>
-                  <option value="community">Community member</option>
+                  <option value="Student">Student</option>
+                  <option value="Faculty">Faculty</option>
+                  <option value="Alumni">Alumni</option>
+                  <option value="Community">Community member</option>
                 </select>
               </div>
             </form>

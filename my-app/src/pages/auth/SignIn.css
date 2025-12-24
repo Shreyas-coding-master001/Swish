@@ -236,3 +236,7 @@
     outline: 2px solid #000064;
     outline-offset: 2px;
 }
+
+.error-text{
+    color: black;
+}

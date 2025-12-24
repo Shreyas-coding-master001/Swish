@@ -25,10 +25,10 @@ function SignIn(){
       try{
         setLoading(true);
         const response = await axios.post(
-          "http://localhost:9000/api/auth/signin",
+          "http://localhost:3000/api/auth/signin",
           {email, password}
         );
-
+        
         const {token, user } = response.data;
 
         localStorage.setItem("token", token);
