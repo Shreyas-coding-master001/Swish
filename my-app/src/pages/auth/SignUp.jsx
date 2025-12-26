@@ -18,6 +18,11 @@ function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [tag, setTag] = useState("");
+  const [bio, setBio] = useState("");
+  const [department, setDepartment] = useState("");
+  const [interests, setInterests] = useState("");
+          
   const [confirmPassword, setConfirmPassword] = useState("");
 
   function handleImageUpload(e) {
@@ -39,7 +44,7 @@ function SignUp() {
 
     try {
       await axios.post("http://localhost:3000/api/auth/signup", 
-        {college,name,email,password,role}
+        {college,name,email,password,role,profileImage,tag,bio,department,interests}
     );
       setLoading(false);
       setSignin(true);
@@ -126,16 +131,16 @@ function SignUp() {
               )}
 
               <p className="tag-title">SwishTag</p>
-              <input className="tag-input" placeholder="Enter a special tag for you" />
+              <input value={tag} onChange={(e) => setTag(e.target.value)} className="tag-input" placeholder="Enter a special tag for you" />
 
               <p className="bio-title">Bio</p>
-              <textarea className="about-input" placeholder="Enter about yourself" />
+              <textarea value={bio} onChange={(e) => setBio(e.target.value)} className="about-input" placeholder="Enter about yourself" />
 
               <p className="department-title">Department</p>
-              <input className="department-input" placeholder="Enter your department" />
+              <input value={department} onChange={(e) => setDepartment(e.target.value)} className="department-input" placeholder="Enter your department" />
 
               <p className="interests-title">Interests</p>
-              <input className="interests-input" placeholder="Enter your interests" />
+              <input value={interests} onChange={(e) => setInterests(e.target.value)} className="interests-input" placeholder="Enter your interests" />
             </div>
           </div>
 
