@@ -17,6 +17,11 @@ router.post("/signup",(req,res)=>{
     email = req.body.email;
     password = req.body.password;
     role = req.body.role;
+    profileImage = req.body.profileImage;
+    tag = req.body.tag;
+    bio = req.body.bio;
+    department = req.body.department;
+    interests = req.body.interests;
     
     bcrypt.genSalt(10, function(err, salt) {
         bcrypt.hash(password, salt, async function(err, hash) {
@@ -27,7 +32,12 @@ router.post("/signup",(req,res)=>{
                 name : username,
                 email,
                 password: hash,
-                role: role
+                role: role,
+                profileImage : profileImage,
+                tag : tag,
+                bio : bio,
+                department : department,
+                interests : interests
             }).then(data => res.send("Data Send", data))
             .catch(err => console.log("Error occured!!",err)
             );
