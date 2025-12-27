@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../module/user");
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 const cookieParse = require("cookie-parser");
+const multer = require("multer");
+const path = require("path");
 
 router.use(express.json());  
 router.use(express.urlencoded({extended: true}));
@@ -11,68 +13,103 @@ router.use(cookieParse());
 
 router.get("/",(req,res)=>{});
 
-router.post("/signup",(req,res)=>{
-    username = req.body.name;
-    college = req.body.college;
-    email = req.body.email;
-    password = req.body.password;
-    role = req.body.role;
-    profileImage = req.body.profileImage;
-    tag = req.body.tag;
-    bio = req.body.bio;
-    department = req.body.department;
-    interests = req.body.interests;
-    
-    bcrypt.genSalt(10, function(err, salt) {
-        bcrypt.hash(password, salt, async function(err, hash) {
-            if(err) return res.status(400).send("Salt Error");
+const storage = multer.diskStorage({
+    destination: (req,file, cb) => {
+        cb(null,"uploads/");
+    },
+    filename: (req, file, cb)=> {
+        cb(null, Date.now() + path.extname(file.originalname));
+    }
+})
 
-            await User.create({
-                college,
-                name : username,
-                email,
-                password: hash,
-                role: role,
-                profileImage : profileImage,
-                tag : tag,
-                bio : bio,
-                department : department,
-                interests : interests
-            }).then(data => res.send("Data Send", data))
-            .catch(err => console.log("Error occured!!",err)
-            );
+const upload = multer({ storage })
+
+router.post("/signup", upload.single("profileImage"), async (req, res) => {
+    try {
+        const {college,name,email,password,role,tag,bio,department,interests} = req.body;
+
+        const profileImage = req.file
+            ? `/uploads/${req.file.filename}`
+            : null;
+
+        const hash = await bcrypt.hash(password, 10);
+
+        const user = await User.create({college,name,email,password: hash,role,profileImage,tag,bio,department,interests});
+
+        res.status(201).json({
+            message: "User created successfully",
+            user
         });
-    });    
 
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: "Signup failed" });
+    }
 });
 
-router.post("/signin", async (req,res)=>{
-    const {email,password} = req.body;
-    let user =  await User.findOne({email});
 
+router.post("/signin", async (req, res) => {
+    const { email, password } = req.body;
 
-    if(!password || !email){
-        return res.send("Empty Password or Email");
-    }
-    if(!bcrypt.compare(password ,user.password)){
-            
-        return res.status(400).json({
-            message:"Invalid email or password"
-        });
+    if (!email || !password) {
+        return res.status(400).json({ message: "Email and password required" });
     }
 
-    let token = jwt.sign({email: user.email},process.env.JWT_SECRET,
-        {
-            expiresIn: "1d"
-        }
+    const user = await User.findOne({ email });
+    if (!user) {
+        return res.status(404).json({ message: "User not found" });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+        return res.status(400).json({ message: "Invalid email or password" });
+    }
+
+    const token = jwt.sign(
+        { id: user._id, email: user.email, role: user.role },
+        process.env.JWT_SECRET,
+        { expiresIn: "1d" }
     );
-    res.cookie("token",token);
+
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: false,  
+        sameSite: "lax",
+        maxAge: 24 * 60 * 60 * 1000
+    });
 
     res.status(200).json({
         message: "Login successful",
+        user: {
+            id: user._id,
+            name: user.name,
+            email: user.email,
+            role: user.role
+        }
     });
-
-
 });
+
+router.get("/profile", async (req, res) => {
+    const token = req.cookies.token;   
+
+    if (!token) {
+        return res.status(401).json({ message: "Not logged in" });
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+        const user = await User.findById(decoded.id).select("-password");
+
+        res.json(user);
+    } catch (err) {
+        res.status(401).json({ message: "Invalid token" });
+    }
+});
+
+// router.post("/logout", (req, res) => {
+//     res.clearCookie("token");
+//     res.status(200).json({ message: "Logged out successfully" });
+// });
 
 module.exports = router;
