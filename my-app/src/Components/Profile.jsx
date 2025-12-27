@@ -1,24 +1,50 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./Profile.css";
+import axios from "axios";
 
 function Profile(){
     const [profileImage, setProfileImage] = useState(null);
     const [bio, setBio] = useState("");
     const fileInputRef = useRef(null);
+    const [user,setUser] = useState(null);
 
-    const handleImageUpload = (e) => {
+    const handleImageUpload = async (e) => {
         const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setProfileImage(reader.result);
-            };
-            reader.readAsDataURL(file);
-        }
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onloadend = async () => {
+            const imageData = reader.result;
+            setProfileImage(imageData); 
+
+            await axios.put(
+                "http://localhost:3000/api/auth/profile-image",
+                { profileImage: imageData },
+                { withCredentials: true }
+            );
+        };
+        reader.readAsDataURL(file);
     };
 
+    useEffect(() => {
+    axios
+        .get("http://localhost:3000/api/auth/profile", {
+        withCredentials: true
+        })
+        .then(res => {
+        setUser(res.data);
+        setBio(res.data.bio || "");
+        setProfileImage(res.data.profileImage || null);
+        })
+        .catch(err => {
+        console.log("Profile fetch failed:", err);
+        });
+    }, []);
+
+
+
     const handleImageClick = () => {
-        fileInputRef.current?.click();
+        alert("iMAGE UPLOAD COMING SOON");
     };
 
     return (
@@ -29,7 +55,8 @@ function Profile(){
                     <div className="profile-image-wrapper">
                         {profileImage ? (
                             <>
-                                <img className="profile-image" src={profileImage} alt="Profile" onClick={handleImageClick} />
+                                <img className="profile-image" src={`http://localhost:3000${profileImage}`} alt="Profile" onClick={handleImageClick} />
+
                                 <p className="verification-batch">Verified</p>
                             </>
                         ) : (
@@ -38,7 +65,7 @@ function Profile(){
                             </div>
                         )}
                     </div>
-                    <p className="tag">Swish tag</p>
+                    <p className="tag">@{user?.tag}</p>
                     
                     <div className="action-buttons">
                         <button className="follow-button">Follow</button>
@@ -55,14 +82,14 @@ function Profile(){
 
                 <div className="right-section-profile">
                     <div className="name-role-section">
-                        <p className="name">Name</p>
-                        <span className="role">Role</span>
+                        <p className="name">{user?.name}</p>
+                        <span className="role">{user?.role}</span>
                     </div>
                     
                     <input className="bio-input" placeholder="Describe yourself in short" value={bio} onChange={(e) => setBio(e.target.value)}/>
-                    {bio && (
+                    {/* {bio && (
                         <p className="bio">{bio}</p>
-                    )}
+                    )} */}
                     
                     <button className="about-button">About them →</button>
                     
