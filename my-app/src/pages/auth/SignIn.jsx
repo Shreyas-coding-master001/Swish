@@ -26,13 +26,11 @@ function SignIn(){
         setLoading(true);
         const response = await axios.post(
           "http://localhost:3000/api/auth/signin",
-          {email, password}
+          {email, password},
+          {withCredentials:true}
         );
         
-        const {token, user } = response.data;
-
-        localStorage.setItem("token", token);
-        localStorage.setItem("user",JSON.stringify(user));
+        localStorage.setItem("user", JSON.stringify(response.data.user));
         setLoading(false);
         navigate("/home");
       } catch (err){
