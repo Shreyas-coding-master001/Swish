@@ -13,14 +13,183 @@
     gap: 0;
 }
 
-.left-community-section {
-    width: 250px;
-    min-width: 250px;
-    height: 100%;
+.initial-section {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100vh;
+}
+
+.left-section-community-before {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 30px;
+    overflow-y: auto;
+    width: 71.87vw;
+    height: 90vh;
+    padding: 30px;
+    background-color: transparent;
+    align-content: start;
+}
+
+.left-section-community-before::-webkit-scrollbar {
+    width: 8px;
+}
+
+.left-section-community-before::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.left-section-community-before::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+/* .new-community {
+    display: flex;
+    flex-direction: row;
+    background-color: rgba(255, 255, 255, 0.12); 
+    align-items: stretch;
+    justify-content: space-between;
+    min-height: 320px;
+    width: 68vw;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 1.5rem;
+    gap: 2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+
+.left-new-community {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+    min-width: 180px;
+} */
+
+.new-community {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.12);
+    align-items: center;
+    justify-content: center;
+    min-height: 320px;
+    min-width: 180px;    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 1rem;    gap: 1rem;    transition: all 0.3s ease;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+
+
+
+.new-community-logo {
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    border: 3px solid white;
+    object-fit: cover;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.new-community-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0;
+    text-align: center;
+    color: white;
+}
+
+.new-community-description {
+    font-size: 0.9rem;
+    font-weight: 400;
+    margin: 0;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.new-view-members-button{
+    padding: 0.6rem 2.4rem;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    transition: all 0.2s ease;
+}
+
+.new-view-members-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.left-bottom-new-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-top: 0.5rem;
+}
+
+.new-about-button,
+.new-join-button {
+    padding: 0.6rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.new-about-button {
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+}
+
+.new-about-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.new-join-button {
+    background-color: #1e90ff;
+    color: white;
+}
+
+.new-join-button:hover {
+    background-color: #1c7ed6;
+    transform: translateY(-1px);
+}
+
+.right-new-community {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
     gap: 1.5rem;
+    flex: 1;
+    position: relative;
+}
+
+.left-community-section {
+    width: 250px;
+    min-width: 250px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
     padding: 2rem 1rem;
     background-color: rgba(255, 255, 255, 0.05);
     border-right: 1px solid rgba(255, 255, 255, 0.2);
@@ -72,6 +241,7 @@
     gap: 1.5rem;
     overflow-y: auto;
     padding-right: 0.5rem;
+    height: 53vh;
 }
 
 .community-organizers::-webkit-scrollbar {
@@ -137,9 +307,28 @@
     margin: 0;
 }
 
+.view-community-button {
+    height: 6vh;
+    width: 10vw;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 5px;
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+}
+
+.view-community-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
 .middle-community-section {
     flex: 1;
-    height: 100%;
+    height: 90.5vh;
     display: flex;
     flex-direction: column;
     background-color: transparent;
@@ -402,6 +591,16 @@
     .middle-bottom-community-section {
         grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     }
+
+    .new-community {
+        width: 90%;
+        min-height: 280px;
+    }
+
+    .new-community-logo {
+        height: 100px;
+        width: 100px;
+    }
 }
 
 @media (max-width: 992px) {
@@ -455,6 +654,34 @@
     .community {
         min-width: 200px;
     }
+
+    .initial-section {
+        flex-direction: column-reverse;
+    }
+
+    .left-section-community-before {
+        width: 100%;
+        order: 2;
+    }
+
+    .right-community-section {
+        width: 100%;
+        order: 1;
+        border-left: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .new-community {
+        width: 95%;
+        flex-direction: column;
+        min-height: auto;
+        gap: 1.5rem;
+    }
+
+    .left-new-community {
+        width: 100%;
+    }
+
 }
 
 @media (max-width: 768px) {
@@ -545,6 +772,26 @@
     .community-profile {
         height: 70px;
         width: 70px;
+    }
+
+    .left-section-community-before {
+        padding: 1rem;
+        height: auto;
+    }
+
+    .new-community {
+        width: 100%;
+        padding: 1rem;
+        min-height: auto;
+    }
+
+    .new-community-logo {
+        height: 90px;
+        width: 90px;
+    }
+
+    .new-community-name {
+        font-size: 1.1rem;
     }
 }
 
@@ -698,5 +945,329 @@
     .join-community-button {
         padding: 0.6rem;
         font-size: 0.8rem;
+    }
+
+    .left-section-community-before {
+        padding: 0.5rem;
+    }
+
+    .new-community {
+        padding: 1rem;
+        gap: 1rem;
+        min-height: auto;
+    }
+
+    .new-community-logo {
+        height: 80px;
+        width: 80px;
+    }
+
+    .new-community-name {
+        font-size: 1rem;
+    }
+
+    .new-community-description {
+        font-size: 0.8rem;
+    }
+
+    .new-about-button,
+    .new-join-button {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+
+}
+
+.new-community {
+    transition: all 0.3s ease;
+}
+
+.right-new-community {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.organizers-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.right-new-community {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 1.5rem;
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 2.5rem 2rem 2rem 2rem;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    animation: slideUp 0.3s ease;
+    margin: auto;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.close-modal-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.new-organizers-label,
+.new-members-label {
+    position: absolute;
+    background-color: #000064;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    z-index: 2;
+    left: 1rem;
+    top: -0.6rem;
+}
+
+.new-members-label{
+    top:13.6rem;
+    left:3rem;
+}
+
+.new-community-organizers,
+.new-community-members {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 1.5rem;
+    padding: 1.5rem 1rem 1rem 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    position: relative;
+}
+
+.right-new-community::-webkit-scrollbar {
+    width: 8px;
+}
+
+.right-new-community::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.right-new-community::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+    .right-new-community {
+        width: 95%;
+        padding: 2rem 1rem 1.5rem 1rem;
+        max-height: 85vh;
+    }
+
+    .new-community-organizers,
+    .new-community-members {
+        justify-content: center;
+        gap: 1rem;
+        padding: 1rem;
+    }
+}
+
+.new-community-profile,
+.new-community-members-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-width: 100px;
+}
+
+.new-organizer-profile,
+.new-members-profile {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    border: 2px solid white;
+    object-fit: cover;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.new-organizer-name,
+.new-members-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin: 0;
+    text-align: center;
+    color: white;
+}
+
+.new-organizer-role {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 8px;
+    background-color: rgba(128, 128, 128, 0.5);
+    color: white;
+    font-weight: 500;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+
+    .new-community-organizers,
+    .new-community-members {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+        .new-community-organizers::-webkit-scrollbar,
+        .new-community-members::-webkit-scrollbar {
+            height: 6px;
+        }
+    
+        .new-community-organizers::-webkit-scrollbar-track,
+        .new-community-members::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+        }
+    
+        .new-community-organizers::-webkit-scrollbar-thumb,
+        .new-community-members::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+        }
+
+    .new-organizer-profile,
+    .new-members-profile {
+        height: 70px;
+        width: 70px;
+    }
+
+    .new-organizer-name,
+    .new-members-name {
+        font-size: 0.75rem;
+    }
+
+    .new-organizer-role {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .right-new-community {
+        width: 98%;
+        padding: 2rem 0.8rem 1.5rem 0.8rem;
+    }
+
+    .new-organizer-profile,
+    .new-members-profile {
+        height: 60px;
+        width: 60px;
+    }
+}
+
+.organizers-section,
+.members-section {
+    position: relative;
+}
+
+@media (max-width: 768px) {
+
+    .new-organizers-label,
+    .new-members-label {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+        left: 0.8rem;
+    }
+
+    .new-community-organizers,
+    .new-community-members {
+        gap: 1rem;
+        padding: 1.2rem 0.8rem 0.8rem 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .new-organizers-label,
+    .new-members-label {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.7rem;
+        left: 0.5rem;
+    }
+
+    .new-community-organizers,
+    .new-community-members {
+        padding: 1rem 0.5rem 0.5rem 0.5rem;
     }
 }
