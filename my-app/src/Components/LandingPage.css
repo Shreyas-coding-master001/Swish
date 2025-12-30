@@ -13,25 +13,12 @@
 }
 
 
-/* .LandingPage{
-    width: 100%;
-    height: 100%;
-    padding: 0.1rem;
-    background: linear-gradient(
-    to bottom,
-    black 1%,
-    darkblue ,
-    blue ,
-    royalblue
-  );
-} */
-
 
 .LandingPage{
     position: fixed;          /* 🔥 REQUIRED */
     inset: 0;                 /* 🔥 REQUIRED */
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     padding: 0.1rem;
 
     background: linear-gradient(
@@ -131,7 +118,7 @@
     border-radius: 50px;
     padding: 2rem;
     background-color: #ffffff63;
-    height: 70%;
+    height: 90%;
     position: relative;
 
     && img{
@@ -156,11 +143,13 @@
 
     && .innerbox{
         width: 100%;
+        height: 100%;
         border-radius: 50px;
         overflow: hidden;
 
         && video{
             width: 100%;
+            height: 100%;
             object-fit: cover;
             object-position: center;
         }
@@ -241,6 +230,7 @@
     .box{
         flex-direction: row-reverse;
         margin: 2rem;
+        height: 80%;
 
         && .part{
             display: flex;
@@ -251,6 +241,7 @@
         && .innerbox{
             background-color: #fff;
             width: 250%;
+            
             && video{
                 height: 100%;
             }

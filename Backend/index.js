@@ -20,4 +20,8 @@ app.get("/",(req,res)=>{
     res.render("index");
 });
 
+app.post("/postInput",(req,res)=>{
+    
+})
+
 app.listen(Port, () => console.log(`Server is running ${Port}`));

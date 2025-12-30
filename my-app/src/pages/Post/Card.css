@@ -1,0 +1,135 @@
+@keyframes LikedAnimation{
+    0%{
+        transform: scale(0) rotate(90deg);
+    }
+    50%{
+        transform: scale(1) rotate(0deg);
+        
+    }
+    100%{
+        transform: translateY(-300%);
+    }
+}
+
+.Post{  
+    padding: 1rem;
+    margin-top: 2rem;
+    background: radial-gradient(darkblue,black);
+    border: 1px solid white;
+    border-radius: 10px;
+    max-width: 425px;
+}
+
+.Post .top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.top .One{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
+}
+
+.ProfilePhoto{
+    background-color: #fff;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 12%;
+}
+
+.LikedAni{
+    font-size: 3rem;
+    position: absolute;
+    top:40%;
+    left: 40%;
+    transform: translate(-50%,-50%);
+    animation: LikedAnimation 1s forwards;
+}
+.LikedAni i{
+    background: linear-gradient(to right bottom,red,pink);
+    background-clip: text;   
+    color: transparent;
+    transition: all 0.5s linear;
+}
+
+.disable{
+    display: none;
+}
+
+.top .ProfilePhoto img{
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    height: 100%;
+}
+
+.Post .displaySection{
+    /* height: 30vh; */
+    margin: 1rem;    
+    position: relative;
+    overflow: hidden;
+}
+
+.Post .top button:active{
+    scale: 0.9;
+}
+
+.Post .top button{
+    color: black;
+    border: 2px solid black;
+    padding: 0.5rem;
+    border-radius: 50px;
+    width: 70%;
+}
+
+.Post .displaySection img, .Post .displaySection video{
+    width: 100%;
+    object-fit: contain;
+    object-position: center;
+    pointer-events: none;
+}
+
+.Post .bottom .Icons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.2rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    width: 80%;
+    text-align: center;
+}
+.Post .bottom i,.Post .bottom i h6{
+    pointer-events: none;
+}
+.Post .bottom div{
+    cursor: pointer;
+}
+.Post .bottom div .ri-heart-fill{
+    color: crimson;
+}
+
+.Post .Desciption{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}   
+
+.Desciption h4{
+    color: gray;
+    font-family: Font1;
+}
+
+.Desciption input{
+    padding: 0.5rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 5px;
+    color: whitesmoke;
+    box-shadow: inset 0 0 0.5rem rgba(255, 255, 255, 0.5);
+}
+
