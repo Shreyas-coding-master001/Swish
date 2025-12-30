@@ -1,6 +1,14 @@
+html,
+body {
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), darkblue);
+    overflow: hidden;
+}
+
 .HomeSection{
     height: 100%;
     width: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.5),darkblue);
 }
 
 .HomeSection #SectionChanging{
@@ -21,7 +29,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 10%;
+    height: 10vh;
     background-color: darkblue;
     padding: 2rem;
 }
@@ -113,7 +121,7 @@
 .One img{
     width: 2.5rem;
 }
-
+ 
 .One label{
     border: 2px solid white;
     padding: 0.2rem;
@@ -202,9 +210,33 @@
     scale: 0.95;
 }
 
+#UserInteraction {
+    position: absolute;
+    top: 85px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), darkblue);
+    margin-left: 152px;
+    height:100vh;
+}
+
 @media (max-width: 767px){
+    .HomeSection {
+            min-height: 100vh;
+            position: relative;
+            background: transparent;
+        }
+    
+        .HomeSection #SectionChanging {
+            z-index: 10;
+        }
+    
+        #UserInteraction {
+            padding-bottom: 70px;
+    }
     .HomeSection #SectionChanging{ 
-        height: 10%;
+        height: 70px;
         width: 100%;
         display: flex;
         flex-direction: row;
@@ -214,6 +246,41 @@
         border-bottom: none;
         border-right: none;
         bottom: 0;
+        background-color: rgba(128, 128, 128, 0.8);
+        left: 0;
+        right: 0;
+    }
+
+    #UserInteraction {
+        position: relative;
+        top: 0;
+        bottom: auto;
+        min-height: calc(100vh - 70px);
+        overflow-y: auto;
+    }
+    
+    .HomeSection #SectionChanging .LINKS {
+        background-color: transparent;
+        color: white;
+        padding: 0.6rem;
+        flex: 1;
+        text-align: center;
+    }
+
+    .target {
+        display: none !important;
+        position: fixed;
+        inset: auto;
+    }
+
+    .HomeSection{
+        height: 100vh;
+    }
+    .target {
+        display: none;
+    }
+    #UserInteraction{
+        margin-left: 0px;
     }
 
     .HomeSection #Main_Navigation{

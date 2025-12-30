@@ -18,12 +18,17 @@ function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [tag, setTag] = useState("");
+  const [bio, setBio] = useState("");
+  const [department, setDepartment] = useState("");
+  const [interests, setInterests] = useState("");
+          
   const [confirmPassword, setConfirmPassword] = useState("");
 
   function handleImageUpload(e) {
     const file = e.target.files[0];
     if (!file) return;
-    setProfileImage(URL.createObjectURL(file));
+    setProfileImage(file);
   }
 
   const handleSend = async (e) => {
@@ -38,9 +43,32 @@ function SignUp() {
     }
 
     try {
-      await axios.post("http://localhost:3000/api/auth/signup", 
-        {college,name,email,password,role}
-    );
+      const formData = new FormData();
+
+      formData.append("college", college);
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("password", password);
+      formData.append("role", role);
+      formData.append("tag", tag);
+      formData.append("bio", bio);
+      formData.append("department", department);
+      formData.append("interests", interests);
+
+      if (profileImage) {
+        formData.append("profileImage", profileImage); // FILE
+      }
+
+      await axios.post(
+        "http://localhost:3000/api/auth/signup",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        }
+      );
+
       setLoading(false);
       setSignin(true);
       setDisplay(false);
@@ -88,10 +116,10 @@ function SignUp() {
 
                 <p className="role-title">Role</p>
                 <select value={role} onChange={(e) => setRole(e.target.value)} className="role-input" >
-                  <option value="Student">Student</option>
-                  <option value="Faculty">Faculty</option>
-                  <option value="Alumni">Alumni</option>
-                  <option value="Community">Community member</option>
+                  <option value="student">Student</option>
+                  <option value="faculty">Faculty</option>
+                  <option value="alumni">Alumni</option>
+                  <option value="community member">Community member</option>
                 </select>
               </div>
             </form>
@@ -122,20 +150,24 @@ function SignUp() {
               <input type="file" accept="image/*" className="image-input" onChange={handleImageUpload} />
 
               {profileImage && (
-                <img className="profile-preview" src={profileImage} />
+                <img
+                  className="profile-preview"
+                  src={URL.createObjectURL(profileImage)}
+                />
               )}
 
+
               <p className="tag-title">SwishTag</p>
-              <input className="tag-input" placeholder="Enter a special tag for you" />
+              <input value={tag} onChange={(e) => setTag(e.target.value)} className="tag-input" placeholder="Enter a special tag for you" />
 
               <p className="bio-title">Bio</p>
-              <textarea className="about-input" placeholder="Enter about yourself" />
+              <textarea value={bio} onChange={(e) => setBio(e.target.value)} className="about-input" placeholder="Enter about yourself" />
 
               <p className="department-title">Department</p>
-              <input className="department-input" placeholder="Enter your department" />
+              <input value={department} onChange={(e) => setDepartment(e.target.value)} className="department-input" placeholder="Enter your department" />
 
               <p className="interests-title">Interests</p>
-              <input className="interests-input" placeholder="Enter your interests" />
+              <input value={interests} onChange={(e) => setInterests(e.target.value)} className="interests-input" placeholder="Enter your interests" />
             </div>
           </div>
 
