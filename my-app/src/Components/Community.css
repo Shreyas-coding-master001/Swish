@@ -468,6 +468,7 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    align-items: center;
 }
 
 .right-community-section>p {
@@ -478,11 +479,12 @@
 }
 
 .more-communities {
-    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    overflow-y: auto;
+    overflow-y: scroll;
+    height:69vh;
+    width: 16vw;
     padding-right: 0.5rem;
 }
 
@@ -575,6 +577,25 @@
 .join-community-button:hover {
     background-color: #1c7ed6;
     transform: translateY(-1px);
+}
+
+.view-all-community-button {
+    height: 6vh;
+    width: 10vw;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 14.5px;
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+}
+
+.view-all-community-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 @media (max-width: 1200px) {
