@@ -156,7 +156,6 @@ function SignUp() {
                 />
               )}
 
-
               <p className="tag-title">SwishTag</p>
               <input value={tag} onChange={(e) => setTag(e.target.value)} className="tag-input" placeholder="Enter a special tag for you" />
 

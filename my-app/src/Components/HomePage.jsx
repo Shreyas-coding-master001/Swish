@@ -1,13 +1,10 @@
 import "./HomePage.css";
 import { Routes,Route, useNavigate } from "react-router-dom";
 import Logo from "../assets/Logo-removebg-preview.png";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import PostSection from "../UI Components/PostUpload";
-import Card from "../pages/Post/Card";
+import { Outlet } from "react-router-dom";
 
 function HomePage(){
-    const [clicked,setClicked] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = () => {
@@ -33,28 +30,7 @@ function HomePage(){
             <Link className="LINKS">Contact</Link>
         </nav>
         <div className="target"></div>
-        <div id={clicked? "complete": "PostInteracting"}>
-            <section className="AddPost">
-                <h3>Share your story with a post</h3>
-                <button onClick={() => setClicked(prev=>!prev)}>Click To Post</button>
-            </section>
-            <div className="Postbox">
-                <Card />
-                <Card />
-                <Card />
-                <Card />    
-            </div>
-        </div>
-        <div className={clicked?"postVisible":"postingdisable"}>
-            <button onClick={() => setClicked(prev=>!prev)} className="Close">X</button>
-            <h3>Post Your Activity : </h3>
-            <form className="InputTaking" onSubmit={handleSubmit}>
-                <h4 htmlFor="DesicriptionArea">Description: </h4>
-                <textarea name="DesicriptionArea" id="DesciptionArea"></textarea>
-                <input type="file" id="fileUpload" />
-                <button type="submit">Create</button>
-            </form>
-        </div>
+
          <section id="UserInteraction">
             <Outlet />
         </section>
