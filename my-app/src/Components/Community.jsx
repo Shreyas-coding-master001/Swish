@@ -3,8 +3,9 @@ import "./Community.css"
 
 function Community(){
 
-    const[joined,setJoined] = useState(false);
+    const[joined,setJoined] = useState(true);
     const[members,openMembers] = useState(false);
+    const[allCommunities,showAllCommunities] = useState(false);
 
     function handleOpenings(){
         openMembers(!members);
@@ -12,6 +13,10 @@ function Community(){
 
     function joinCommunity(){
         setJoined(!joined);
+    }
+
+    function handleCommunities(){
+        showAllCommunities(!allCommunities);
     }
 
     return <div className="community-container">
@@ -69,62 +74,54 @@ function Community(){
                 </div>
             )}
 
-            {!joined && (
-        <div className="initial-section">
-            <div className="left-section-community-before">
-                <div className="new-community">
-                    <img src="../images/Communitylogo2.png" alt="community logo" className="new-community-logo"/>
-                    <p className="new-community-name">Community 1</p>
-                    <p className="new-community-description">Learn grow rich</p>
-                    <div className="new-left-bottom-buttons">                        
-                        <button className="new-view-members-button" onClick={handleOpenings}>View members</button>
-                        <div className="left-bottom-new-section">
-                            <button className="new-about-button">About</button>
-                            <button className="new-join-button" onClick={joinCommunity}>Join</button>
+            {allCommunities && (
+                <div className="initial-section">
+                    <div className="left-section-community-before">
+                        <div className="new-community">
+                            <img src="../images/Communitylogo2.png" alt="community logo" className="new-community-logo"/>
+                            <p className="new-community-name">Community 1</p>
+                            <p className="new-community-description">Learn grow rich</p>
+                            <div className="new-left-bottom-buttons">                        
+                                <button className="new-view-members-button" onClick={handleOpenings}>View members</button>
+                                <div className="left-bottom-new-section">
+                                    <button className="new-about-button">About</button>
+                                    <button className="new-join-button" onClick={joinCommunity}>Join</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+
+
+                    <div className="right-community-section">
+                        <p>Trending communities!</p>
+                        <div className="more-communities">
+                            <div className="community">
+                                <div className="profile-name-community">
+                                    <img src="../images/Communitylogo1.png" className="community-profile"/>
+                                    <p className="name-of-community">Community1</p>
+                                </div>
+                                <div className="about-join">
+                                    <button className="about-community-button">About</button>
+                                    <button className="join-community-button">Join</button>
+                                </div>
+                            </div>
+                            <div className="community">
+                                <div className="profile-name-community">
+                                    <img src="../images/Communitylogo2.png" className="community-profile"/>
+                                    <p className="name-of-community">Community2</p>
+                                </div>
+                                <div className="about-join">
+                                    <button className="about-community-button">About</button>
+                                    <button className="join-community-button">Join</button>
+                                </div>
+                            </div>
+                            
+                                          
+                        </div>
+                    </div>
+
                 </div>
-            </div>
-
-
-
-            <div className="right-community-section">
-                <p>Trending communities!</p>
-                <div className="more-communities">
-                    <div className="community">
-                        <div className="profile-name-community">
-                            <img src="../images/Communitylogo1.png" className="community-profile"/>
-                            <p className="name-of-community">Community1</p>
-                        </div>
-                        <div className="about-join">
-                            <button className="about-community-button">About</button>
-                            <button className="join-community-button">Join</button>
-                        </div>
-                    </div>
-                    <div className="community">
-                        <div className="profile-name-community">
-                            <img src="../images/Communitylogo2.png" className="community-profile"/>
-                            <p className="name-of-community">Community2</p>
-                        </div>
-                        <div className="about-join">
-                            <button className="about-community-button">About</button>
-                            <button className="join-community-button">Join</button>
-                        </div>
-                    </div>
-                    <div className="community">
-                        <div className="profile-name-community">
-                            <img src="../images/Communitylogo3.png" className="community-profile"/>
-                            <p className="name-of-community">Community3</p>
-                        </div>
-                        <div className="about-join">
-                            <button className="about-community-button">About</button>
-                            <button className="join-community-button">Join</button>
-                        </div>
-                    </div>                    
-                </div>
-            </div>
-
-        </div>
             )
             }
        
@@ -223,8 +220,19 @@ function Community(){
                                 <button className="about-community-button">About</button>
                                 <button className="join-community-button">Join</button>
                             </div>
-                        </div>                    
+                        </div> 
+                            <div className="community">
+                            <div className="profile-name-community">
+                                <img src="../images/Communitylogo3.png" className="community-profile"/>
+                                <p className="name-of-community">Community3</p>
+                            </div>
+                            <div className="about-join">
+                                <button className="about-community-button">About</button>
+                                <button className="join-community-button">Join</button>
+                            </div>
+                        </div>                        
                     </div>
+                    <button className="view-all-community-button"  onClick={handleCommunities}>View all communities</button>
                 </div>
             </div>)
         }
