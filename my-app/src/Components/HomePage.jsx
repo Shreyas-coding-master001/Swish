@@ -26,6 +26,7 @@ function HomePage(){
             <Link to="" className="LINKS">Home</Link>
             <Link to="profile" className="LINKS">Profile</Link>
             <Link to="community" className="LINKS">Community</Link>
+            <Link to="people" className="LINKS">People</Link>
             <Link className="LINKS">About</Link>
             <Link className="LINKS">Contact</Link>
         </nav>
