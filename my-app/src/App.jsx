@@ -10,6 +10,8 @@ import Community from './Components/Community'
 import PostUpload from './UI Components/PostUpload'
 import Card from "./pages/Post/Card"
 import Feed from "./Components/Feed"
+import People from "./pages/People/People";
+
 function App() {
   const [count, setCount] = useState(0)
 
@@ -22,6 +24,7 @@ function App() {
           <Route index element={<Feed />} />
           <Route path="profile" element={<Profile />}/>
           <Route path="community"element={<Community/>}/>
+          <Route path="people" element={<People/>}/>
           <Route path="card" element={<Card/>}/>
         </Route>
         <Route path="/signup" element={<SignUp />} />
