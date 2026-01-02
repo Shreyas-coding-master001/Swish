@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../module/user");
+const Post = require("../module/post");
 const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 const cookieParse = require("cookie-parser");
@@ -106,6 +107,50 @@ router.get("/profile", async (req, res) => {
         res.status(401).json({ message: "Invalid token" });
     }
 });
+
+router.post("/post", upload.single("media"), async (req, res) => {
+  const token = req.cookies.token;
+
+  if (!token) {
+    return res.status(401).json({ message: "Not logged in" });
+  }
+
+  try {
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const author = decoded.id;
+
+    const { description, community } = req.body;
+
+    const media = req.file
+      ? `/uploads/${req.file.filename}`
+      : null;
+
+    const postUpload = await Post.create({author,description,media,community});
+
+    res.status(201).json({
+      message: "Post uploaded successfully",
+      postUpload
+    });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Post upload failed" });
+  }
+});
+
+router.get("/posts", async (req, res) => {
+  try {
+    const posts = await Post.find()
+      .populate("author", "name profileImage")
+      .sort({ createdAt: -1 });
+
+    res.status(200).json({ posts });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to fetch posts" });
+  }
+});
+
 
 // router.post("/logout", (req, res) => {
 //     res.clearCookie("token");
