@@ -1,13 +1,15 @@
-const express = require("express");
-const cors = require("cors");
-const app = express();
-const connectDB = require("./config/db");
-const Port = process.env.PORT || 3000;
-const authSection = require("./controllers/authSection")
-
 require("dotenv").config();
 
-app.set("view engine","ejs");
+const express = require("express");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const connectDB = require("./config/db");
+const authSection = require("./controllers/authSection");
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.set("view engine", "ejs");
 
 connectDB();
 
@@ -16,17 +18,15 @@ app.use(cors({
   credentials: true
 }));
 
-app.use(express.json())
-app.use(express.urlencoded({extended: true}));
-app.use("/api/auth",authSection)
-app.use("/uploads", express.static("uploads"));
+app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.get("/",(req,res)=>{
-    res.render("index");
+app.use("/uploads", express.static("uploads"));
+app.use("/api/auth", authSection);
+
+app.get("/", (req, res) => {
+  res.render("index");
 });
 
-app.post("/postInput",(req,res)=>{
-    
-})
-
-app.listen(Port, () => console.log(`Server is running ${Port}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
