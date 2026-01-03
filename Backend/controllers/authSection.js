@@ -149,6 +149,15 @@ router.get("/posts", async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: "Failed to fetch posts" });
   }
+}); 
+
+router.get("/users", async (req, res) => {
+  try {
+    const users = await User.find().select("-password"); 
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json({ message: "No user found" });
+  }
 });
 
 
