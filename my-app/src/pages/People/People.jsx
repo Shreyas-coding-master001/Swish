@@ -1,82 +1,80 @@
-import "./People.css"
+import { useEffect, useState } from "react";
+import axios from "axios";
+import PeopleCard from "./PeopleCard";
+import "./People.css";
 
-function People(){
-    return <div>
-        <div className="people-container">
-            <div className="top-section-people">
-                <div>
-                    <input placeholder="Search peoples around you" className="search-bar-people"/>
-                    <button className="search-button-people">Search</button>
-                </div>
-                <select>
-                    <option>Faculty</option>
-                    <option>Alumni</option>
-                    <option>Student</option>
-                </select>
-            </div>
-            <div className="bottom-section-people">
-                <div className="faculty-section-people">
-                    <p className="faculty-label-people">Faculty</p>
-                    <hr/>
-                    <div className="faculty-container-people">
-                        <div className="people-cards">
-                            <img src="../images/profilelogo.png" className="people-profile-logo"/>
-                            <p className="swish-tag-people">Swish tag</p>
-                            <div className="name-role-people">
-                                <p className="people-name">Faculty Name</p>
-                                <p className="people-role">Maths Teacer</p>
-                            </div>
-                            <p className="bio-desc-people">Short 2-3 words desc</p>
-                            <div className="bio-follow-button-people">
-                                <button className="bio-button">Bio</button>
-                                <button className="follow-button-people">Follow</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="alumni-section-people">
-                    <p className="alumni-label-people">alumni</p>
-                    <hr/>
-                    <div className="alumni-container-people">
-                        <div className="people-cards">
-                            <img src="../images/profilelogo.png" className="people-profile-logo"/>
-                            <p className="swish-tag-people">Swish tag</p>
-                            <div className="name-role-people">
-                                <p className="people-name">Name</p>
-                                <p className="people-role">Role</p>
-                            </div>
-                            <p className="bio-desc-people">Short 2-3 words desc</p>
-                            <div className="bio-follow-button-people">
-                                <button className="bio-button">Bio</button>
-                                <button className="follow-button-people">Follow</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="students-section-people">
-                    <p className="students-label-people">students</p>
-                    <hr/>
-                    <div className="students-container-people">
-                        <div className="people-cards">
-                            <img src="../images/profilelogo.png" className="people-profile-logo"/>
-                            <p className="swish-tag-people">Swish tag</p>
-                            <div className="name-role-people">
-                                <p className="people-name">Name</p>
-                                <p className="people-role">Role</p>
-                            </div>
-                            <p className="bio-desc-people">Short 2-3 words desc</p>
-                            <div className="bio-follow-button-people">
-                                <button className="bio-button">Bio</button>
-                                <button className="follow-button-people">Follow</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+function People() {
+  const [peoples, setPeoples] = useState([]);
 
-            
+  useEffect(() => {
+    const fetchPeoples = async () => {
+      try {
+        const res = await axios.get(
+          "http://localhost:3000/api/auth/users",
+          { withCredentials: true }
+        );
+        setPeoples(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchPeoples();
+  }, []);
+
+  const faculty = peoples.filter(p => p.role === "faculty");
+  const alumni = peoples.filter(p => p.role === "alumni");
+  const students = peoples.filter(p => p.role === "student");
+
+  return (
+    <div className="people-container">
+
+      <div className="top-section-people">
+        <div>
+          <input
+            placeholder="Search peoples around you"
+            className="search-bar-people"
+          />
+          <button className="search-button-people">Search</button>
         </div>
+        <select>
+          <option>Faculty</option>
+          <option>Alumni</option>
+          <option>Student</option>
+        </select>
+      </div>
+
+      <div className="faculty-section-people">
+        <p className="faculty-label-people">Faculty</p>
+        <hr />
+        <div className="faculty-container-people">
+          {faculty.map(user => (
+            <PeopleCard key={user._id} user={user} />
+          ))}
+        </div>
+      </div>
+
+      <div className="alumni-section-people">
+        <p className="alumni-label-people">Alumni</p>
+        <hr />
+        <div className="alumni-container-people">
+          {alumni.map(user => (
+            <PeopleCard key={user._id} user={user} />
+          ))}
+        </div>
+      </div>
+
+      <div className="students-section-people">
+        <p className="students-label-people">Students</p>
+        <hr />
+        <div className="students-container-people">
+          {students.map(user => (
+            <PeopleCard key={user._id} user={user} />
+          ))}
+        </div>
+      </div>
+
     </div>
+  );
 }
 
 export default People;
