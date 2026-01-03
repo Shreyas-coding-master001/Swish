@@ -1,0 +1,391 @@
+.people-cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.08) 100%);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 2rem 1.5rem;
+    gap: 1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    min-width: 240px;
+    max-width: 240px;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+        border-color: rgba(255, 255, 255, 0.25);
+}
+
+.people-cards::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #1e90ff, #00bfff);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.people-cards:hover::before {
+    opacity: 1;
+}
+
+/* .people-cards:hover {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.12) 100%);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.25);
+} */
+
+.people-profile-logo {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.9);
+    object-fit: cover;
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.people-cards:hover .people-profile-logo {
+    transform: scale(1.05);
+    border-color: #1e90ff;
+    box-shadow: 0 6px 16px rgba(30, 144, 255, 0.4);
+}
+
+.swish-tag-people {
+    font-size: 0.8rem;
+    padding: 0.35rem 0.9rem;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #1e90ff 0%, #00bfff 100%);
+    color: white;
+    font-weight: 600;
+    margin: 0;
+    box-shadow: 0 2px 8px rgba(30, 144, 255, 0.3);
+    letter-spacing: 0.5px;
+}
+
+.name-role-people {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    margin-top: 0.2rem;
+}
+
+.people-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.95);
+    letter-spacing: 0.3px;
+}
+
+.people-role {
+    font-size: 0.8rem;
+    padding: 0.35rem 1rem;
+    border-radius: 14px;
+    background-color: rgba(128, 128, 128, 0.35);
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    margin: 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bio-desc-people {
+    font-size: 0.875rem;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0;
+    line-height: 1.5;
+    max-height: 3em;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.bio-follow-button-people {
+    display: flex;
+    flex-direction: row;
+    gap: 0.8rem;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.bio-button,
+.follow-button-people {
+    flex: 1;
+    padding: 0.65rem 1rem;
+    border-radius: 10px;
+    border: none;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.bio-button {
+    background-color: transparent;
+    color: white;
+    border: 1.5px solid rgba(255, 255, 255, 0.6);
+}
+
+.bio-button:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: white;
+    transform: translateY(-2px);
+}
+
+.follow-button-people {
+    background: linear-gradient(135deg, #1e90ff 0%, #1c7ed6 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(30, 144, 255, 0.3);
+}
+
+.follow-button-people:hover {
+    background: linear-gradient(135deg, #1c7ed6 0%, #1a73c7 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(30, 144, 255, 0.4);
+}
+
+.bio-button:active,
+.follow-button-people:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 1200px) {
+    .people-cards {
+        min-width: 220px;
+        max-width: 220px;
+        padding: 1.8rem 1.3rem;
+    }
+
+    .people-profile-logo {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media (max-width: 992px) {
+    .top-section-people {
+        flex-direction: column;
+        gap: 1.2rem;
+        align-items: stretch;
+        padding: 1.5rem 2rem;
+    }
+
+    .top-section-people>div {
+        width: 100%;
+    }
+
+    .top-section-people select {
+        width: 100%;
+    }
+
+    .bottom-section-people {
+        padding: 2rem;
+        gap: 2.5rem;
+    }
+
+    .people-cards {
+        min-width: 200px;
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .people-container {
+        padding-bottom: 70px;
+    }
+
+    .top-section-people {
+        padding: 1.3rem 1.5rem;
+    }
+
+    .search-bar-people,
+    .search-button-people,
+    .top-section-people select {
+        font-size: 0.9rem;
+    }
+
+    .bottom-section-people {
+        padding: 1.5rem;
+        gap: 2rem;
+    }
+
+    .faculty-label-people,
+    .alumni-label-people,
+    .students-label-people {
+        font-size: 1.2rem;
+    }
+
+    .people-cards {
+        min-width: 190px;
+        max-width: 190px;
+        padding: 1.5rem 1.2rem;
+    }
+
+    .people-profile-logo {
+        width: 95px;
+        height: 95px;
+    }
+}
+
+@media (max-width: 480px) {
+    .people-container {
+        padding-bottom: 70px;
+        height: auto;
+        min-height: calc(100vh - 70px);
+    }
+
+    .top-section-people {
+        padding: 1.2rem;
+        gap: 1rem;
+    }
+
+    .top-section-people>div {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .search-bar-people {
+        width: 100%;
+        padding: 0.8rem 1.2rem;
+        font-size: 0.9rem;
+    }
+
+    .search-button-people {
+        width: 100%;
+        padding: 0.8rem;
+    }
+
+    .top-section-people select {
+        width: 100%;
+        padding: 0.8rem 1.2rem;
+    }
+
+    .bottom-section-people {
+        padding: 1.2rem;
+        gap: 2rem;
+    }
+
+    .faculty-label-people,
+    .alumni-label-people,
+    .students-label-people {
+        font-size: 1.1rem;
+    }
+
+    .people-cards {
+        min-width: 180px;
+        max-width: 180px;
+        padding: 1.5rem 1rem;
+    }
+
+    .people-profile-logo {
+        width: 100px;
+        height: 100px;
+    }
+
+    .people-name {
+        font-size: 1rem;
+    }
+
+    .people-role {
+        font-size: 0.75rem;
+    }
+
+    .bio-desc-people {
+        font-size: 0.85rem;
+    }
+
+    .bio-follow-button-people {
+        flex-direction: column;
+        gap: 0.6rem;
+    }
+
+    .bio-button,
+    .follow-button-people {
+        width: 100%;
+        padding: 0.7rem;
+        font-size: 0.875rem;
+    }
+
+    .swish-tag-people {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.7rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .top-section-people {
+        padding: 1rem;
+    }
+
+    .search-bar-people,
+    .search-button-people,
+    .top-section-people select {
+        font-size: 0.85rem;
+        padding: 0.7rem 1rem;
+    }
+
+    .bottom-section-people {
+        padding: 1rem;
+    }
+
+    .people-cards {
+        min-width: 170px;
+        max-width: 170px;
+        padding: 1.3rem 0.9rem;
+    }
+
+    .people-profile-logo {
+        width: 90px;
+        height: 90px;
+        border-width: 2px;
+    }
+
+    .faculty-label-people,
+    .alumni-label-people,
+    .students-label-people {
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .people-cards {
+        min-width: 195px;
+        max-width: 195px;
+    }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+    .people-container {
+        padding-bottom: 60px;
+    }
+
+    .top-section-people {
+        padding: 1rem 1.8rem;
+    }
+
+    .bottom-section-people {
+        padding: 1.2rem 1.8rem;
+    }
+
+    .people-cards {
+        padding: 1.2rem 1rem;
+        min-width: 180px;
+        max-width: 180px;
+    }
+
+    .people-profile-logo {
+        width: 80px;
+        height: 80px;
+    }
+}
