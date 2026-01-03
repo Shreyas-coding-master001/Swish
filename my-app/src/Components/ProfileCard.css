@@ -1,0 +1,424 @@
+.profile-card-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+}
+
+.profile-card {
+    background: linear-gradient(135deg, rgba(30, 30, 50, 0.95), rgba(20, 20, 40, 0.95));
+    border-radius: 20px;
+    width: 90%;
+    max-width: 900px;
+    max-height: 85vh;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 10;
+    line-height: 1;
+}
+
+.close-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+}
+
+.card-sections {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 2rem;
+    padding: 2rem;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+    color: white;
+}
+
+.card-sections::before {
+    content: '';
+    position: absolute;
+    left: 240px;
+    top: 2rem;
+    bottom: 2rem;
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin-left: 1rem;
+}
+
+.card-left-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    width:12vw;
+}
+
+.profile-input {
+    display: none;
+}
+
+.card-profile-image-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.card-profile-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid white;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.card-profile-image:hover {
+    opacity: 0.9;
+}
+
+.card-profile-image-placeholder {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 2px dashed rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 1rem;
+}
+
+.card-profile-image-placeholder:hover {
+    border-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.card-verification-badge {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    background-color: #1e90ff;
+    font-weight: 500;
+    margin: 0;
+}
+
+.card-tag {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin: 0.3rem 0;
+}
+
+.card-action-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 0.6rem;
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+.card-follow-button,
+.card-message-button {
+    flex: 1;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.card-follow-button {
+    background-color: #1e90ff;
+    color: white;
+}
+
+.card-follow-button:hover {
+    background-color: #1c7ed6;
+}
+
+.card-message-button {
+    background-color: white;
+    color: black;
+}
+
+.card-message-button:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.card-communities-section {
+    width: 100%;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.12);
+    padding: 1rem;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.card-communities-section::-webkit-scrollbar {
+    width: 5px;
+}
+
+.card-communities-section::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+}
+
+.card-communities-section::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+
+.card-communities-section::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.card-communities-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0 0 0.8rem 0;
+}
+
+.card-community-item {
+    font-size: 0.85rem;
+    padding: 0.4rem 0;
+    opacity: 0.9;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.card-community-item:hover {
+    opacity: 1;
+    padding-left: 0.3rem;
+}
+
+.card-right-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    min-height: 0;
+}
+
+.card-name-role-section {
+    display: flex;
+    flex-direction: row;
+    gap: 0.8rem;
+    align-items: center;
+}
+
+.card-name {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.card-role {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 6px;
+    background-color: rgba(128, 128, 128, 0.4);
+    font-weight: 500;
+}
+
+.card-bio-input {
+    width: 100%;
+    padding: 0.5rem 0.8rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    outline: none;
+    font-size: 0.85rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    transition: all 0.2s ease;
+}
+
+.card-bio-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.card-bio-input:disabled {
+    cursor: default;
+    opacity: 0.8;
+}
+
+.card-about-button {
+    width: fit-content;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    border: 1px solid white;
+    background: transparent;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: normal;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.card-about-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateX(2px);
+}
+
+.card-count-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    font-size: 0.85rem;
+    opacity: 0.9;
+    padding: 0.8rem;
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+}
+
+.card-count-section p {
+    margin: 0;
+    font-weight: 500;
+    white-space: nowrap;
+    font-size: 0.8rem;
+}
+
+.card-follower,
+.card-following,
+.card-post-count,
+.card-community-joined {
+    font-weight: 500;
+}
+
+.card-post-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
+    max-height: 280px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+.card-post-section::-webkit-scrollbar {
+    width: 5px;
+}
+
+.card-post-section::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+}
+
+.card-post-section::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+
+.card-post-section::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.card-post {
+    height: 140px;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.card-post:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .profile-card {
+        width: 95%;
+        max-height: 90vh;
+    }
+
+    .card-sections {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .card-sections::before {
+        display: none;
+    }
+
+    .card-left-section {
+        max-width: 100%;
+    }
+
+    .card-count-section {
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        justify-content: center;
+    }
+
+    .card-post-section {
+        grid-template-columns: repeat(2, 1fr);
+        max-height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-sections {
+        padding: 1.2rem;
+    }
+
+    .close-button {
+        top: 0.5rem;
+        right: 0.5rem;
+        width: 35px;
+        height: 35px;
+        font-size: 1.5rem;
+    }
+
+    .card-count-section {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    .card-post-section {
+        grid-template-columns: 1fr;
+    }
+
+    .card-action-buttons {
+        flex-direction: column;
+    }
+}
