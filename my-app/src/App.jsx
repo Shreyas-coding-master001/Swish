@@ -15,8 +15,8 @@ function App() {
     <main>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/home" element={<HomePage />}>
-          <Route index element={<div />} />
+        <Route path="/home" element={<HomePage />} >
+          {/* <Route index element={<div />} /> */}
           <Route path="profile" element={<Profile />}/>
           <Route path="community"element={<Community/>}/>
         </Route>

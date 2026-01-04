@@ -1,8 +1,15 @@
+:root{
+    --x: auto;
+}
+
 html,
 body {
     height: 100vh;
     background: linear-gradient(rgba(0, 0, 0, 0.5), darkblue);
-    overflow: hidden;
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+    scrollbar-color: whitesmoke darkblue;
+    overflow: var(--x);
 }
 
 .HomeSection{
@@ -69,14 +76,35 @@ body {
     align-items: center;
 }
 
-.InputTaking{
-    margin-top: 1rem;
-    height: 60%;
-    width: 100%;
+/* Blur everything behind */
+body:has(.postOverlay) {
+  overflow: hidden;
 }
 
-.postVisible{
+body:has(.postOverlay)::before{
+  content: "";
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(6px);
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 99;
+}
+
+/* Post modal above blur */
+.postVisible {
+  position: fixed;
+  z-index: 1000;
+}
+
+.postVisible .InputTaking{
+    margin-top: 1rem;
+    height: 90%;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 1rem;
 }
 
 .postVisible .InputTaking input{
@@ -91,6 +119,17 @@ body {
     width: 100%;
     border-radius: 5px;
     padding: 0.5rem;
+}
+.postVisible .InputTaking button{
+    padding: 0.2rem;
+    border: none;
+    border-radius: 10px;
+    color: black;
+    background: linear-gradient(to right top, whitesmoke,lightblue);
+    font-family: Font1;
+    font-size: 0.8rem;
+    font-weight: 550;
+    width: 50%;
 
 }
 

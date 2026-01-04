@@ -133,3 +133,9 @@
     box-shadow: inset 0 0 0.5rem rgba(255, 255, 255, 0.5);
 }
 
+.bottom>p{
+    margin: 1rem;
+    font-size: 1rem;
+    color: gray;
+}
+

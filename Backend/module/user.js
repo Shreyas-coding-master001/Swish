@@ -10,7 +10,8 @@ const userSchema = new mongoose.Schema({
         tag : {type: String,trim: true, unique: true},
         bio : {type: String, trim: true, required: true},
         department : {type:String, trim: true},
-        interests : {type:String, trim: true}
+        interests : {type:String, trim: true},
+        posts: [{type: mongoose.Schema.Types.ObjectId,ref: "post"}]
     },
     {timestamps: true}
 );

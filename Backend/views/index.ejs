@@ -59,9 +59,9 @@
     </section>
     <section class="three">
         <h2>Post</h2>
-        <form action="/postInput" method="post">
-            <textarea name="DesicriptionArea" id="DesciptionArea" ></textarea>
-            <input type="file" name="file">
+        <form action="/postInput" method="POST" enctype="multipart/form-data">
+            <textarea name="description" id="DesciptionArea" ></textarea>
+            <input type="file" name="media" >
             <button type="submit">Post</button>
         </form>
     </section>
