@@ -17,22 +17,46 @@
 
 const mongoose = require("mongoose");
 
-const userSechema = new mongoose.Schema({
-  profilePhoto: {type: String, required: false, trim: true},
+const postSchema = new mongoose.Schema(
+  {
   user: {type: mongoose.Schema.Types.ObjectId, required: true, trim: true, ref: "users"},
+
   followedAcc: [{type: mongoose.Schema.Types.ObjectId,
     ref: "users"
   }],
+
   likedAcc: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "users"
   }],
+
   Descprition: {type: String, required: false, trim: true, default: ""},
-  Community: {type: String, required: true, trim: true},
+
   Comments : [{type: mongoose.Schema.Types.ObjectId,
     ref: "comment"
   }],
-  Post : {type:String, required:true, trim: true}
-});
+
+  Post : {type:String, required:true, trim: true},
+
+  Community: [{type: String, required: true, trim: true}],
+
+  reposts: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "users"
+  }],
+
+  shares: {
+    type: Number,
+    default: 0
+  },
+
+  views: {
+    type: Number,
+    default: 0
+  }
+  },
+  { timestamps: true }
+);
+
 
 module.exports = mongoose.model("Post", postSchema);

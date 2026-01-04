@@ -12,21 +12,28 @@ function Feed(){
     const [error, setError] = useState("");
     const [posts, setPosts] = useState([]);
 
-    useEffect(() => {
-    const fetchPosts = async () => {
-        try {
-        const res = await axios.get(
-            "http://localhost:3000/api/auth/posts",
-            { withCredentials: true }
-        );
-        setPosts(res.data.posts);
-        } catch (err) {
-        console.error(err);
-        }
-    };
+    // useEffect(() => {
+    // const fetchPosts = async () => {
+    //     try {
+    //         const res = await axios.get(
+    //             "http://localhost:3000/api/auth/posts",
+    //             { withCredentials: true }
+    //         );
+    //         setPosts(res.data.posts);
+    //     } catch (err) {
+    //     console.error(err);
+    //     }
+    // };
 
-    fetchPosts();
-    }, []);
+    // fetchPosts();
+    // }, []);
+    useEffect(function(){
+            axios.get("http://localhost:3000/DisplayPost", {
+                withCredentials: true
+            })
+            .then(res => setPosts(res.data))
+            .catch(err => console.error(err.message));
+    },[]);
 
 
     const handlePostUpload = (e) => {
@@ -35,49 +42,76 @@ function Feed(){
         setMedia(file);
     }
 
-    const handleSubmit = async(e) => {
+    // const handleSubmit = async(e) => {
+    //     e.preventDefault();
+
+    //     try{
+    //         const formData = new FormData();
+    //     formData.append("description",description);
+    //     formData.append("media",media);
+
+
+    //     await axios.post(
+    //         "http://localhost:3000/api/auth/post",
+    //         formData,
+    //         { withCredentials: true }
+    //     );
+
+    //     }catch (err) {
+    //         if (err.response && err.response.data.message) {
+    //             setError(err.response.data.message);
+    //         } else {
+    //             setError("Something went wrong. Please try again.");
+    //         }
+    //     }
+        
+    // }
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        try{
-            const formData = new FormData();
-        formData.append("description",description);
-        formData.append("media",media);
+        const formData = new FormData();
+        formData.append("description", e.target.description.value);
+        formData.append("media", e.target.media.files[0]);
 
-
-        await axios.post(
-            "http://localhost:3000/api/auth/post",
-            formData,
-            { withCredentials: true }
-        );
-
-        }catch (err) {
-            if (err.response && err.response.data.message) {
-                setError(err.response.data.message);
-            } else {
-                setError("Something went wrong. Please try again.");
+        try {
+            const res = await axios.post(
+            "http://localhost:3000/postInput",
+            formData, {
+                withCredentials: true
             }
-        }
-        
-    }
+            );
+            setPosts(res.data);
+            console.log(res.data);
+            
+            setClicked(prev=>{
+                if(prev) document.documentElement.style.setProperty("--x","auto");
+                else document.documentElement.style.setProperty("--x","hidden");
+                return !prev
+            });
+            
+        } catch (err) {
+            console.error(err);
+        }       
+    };
+
 
     return <div className="post-container-feed">
         <div id={clicked? "complete": "PostInteracting"}>
             <section className="AddPost">
                 <h3>Share your story with a post</h3>
-                <button onClick={() => setClicked(prev=>!prev)}>Click To Post</button>
+                <button onClick={() => setClicked(prev=>{
+                    if(prev) document.documentElement.style.setProperty("--x","auto");
+                    else document.documentElement.style.setProperty("--x","hidden");
+                    return !prev
+                })}>Click To Post</button>
             </section>
+
             <div className="Postbox">
                 {posts.map(post => (
-                    <Card
-                        key={post._id}
-                        description={post.description}
-                        media={post.media}
-                        author={post.author}
-                        likes={post.likes}
-                        createdAt={post.createdAt}
-                        reposts={post.reposts}
-                    />
-                ))}
+                <div className="Cardbox" key={post._id}>
+                    <Card post={post} />
+                </div>
+            ))}
   
             </div>
         </div>

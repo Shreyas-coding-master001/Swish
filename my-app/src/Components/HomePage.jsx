@@ -6,47 +6,41 @@ import { Outlet } from "react-router-dom";
 import PostSection from "../UI Components/PostUpload";
 import Card from "../pages/Post/Card";
 import axios from "axios";
+import { useState,useEffect} from "react";
 
 function HomePage(){
     const [clicked,setClicked] = useState(false);
     const [posts, setPosts] = useState([]);
-    const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
 
-        const formData = new FormData();
-        formData.append("description", e.target.description.value);
-        formData.append("media", e.target.media.files[0]);
+    //     const formData = new FormData();
+    //     formData.append("description", e.target.description.value);
+    //     formData.append("media", e.target.media.files[0]);
 
-        try {
-            const res = await axios.post(
-            "http://localhost:3000/postInput",
-            formData, {
-                withCredentials: true
-            }
-            );
-            setPosts(res.data);
-            console.log(res.data);
+    //     try {
+    //         const res = await axios.post(
+    //         "http://localhost:3000/postInput",
+    //         formData, {
+    //             withCredentials: true
+    //         }
+    //         );
+    //         setPosts(res.data);
+    //         console.log(res.data);
             
-            setClicked(prev=>{
-                if(prev) document.documentElement.style.setProperty("--x","auto");
-                else document.documentElement.style.setProperty("--x","hidden");
-                return !prev
-            });
+    //         setClicked(prev=>{
+    //             if(prev) document.documentElement.style.setProperty("--x","auto");
+    //             else document.documentElement.style.setProperty("--x","hidden");
+    //             return !prev
+    //         });
             
-        } catch (err) {
-            console.error(err);
-        }       
-    };
+    //     } catch (err) {
+    //         console.error(err);
+    //     }       
+    // };
 
-    useEffect(function(){
-        axios.get("http://localhost:3000/DisplayPost", {
-            withCredentials: true
-        })
-        .then(res => setPosts(res.data))
-        .catch(err => console.error(err.message));
-    },[]);
+    
 
     return( <div className="HomeSection">
         <section id="Main_Navigation"> 
@@ -59,20 +53,20 @@ function HomePage(){
                 <input type="text" placeholder="Serach"/>
             </div>
         </section>
-        <nav id="SectionChanging">
-            <Link to="" className="LINKS">Home</Link>
-            <Link to="profile" className="LINKS">Profile</Link>
-            <Link to="community" className="LINKS">Community</Link>
-            <Link to="people" className="LINKS">People</Link>
-            <Link className="LINKS">About</Link>
-            <Link className="LINKS">Contact</Link>
-        </nav>
+        <div className="completebg">
+            <nav id="SectionChanging">
+                <Link to="" className="LINKS">Home</Link>
+                <Link to="profile" className="LINKS">Profile</Link>
+                <Link to="community" className="LINKS">Community</Link>
+                <Link to="people" className="LINKS">People</Link>
+            </nav>
+        </div>
         <div className="target"></div>
 
          <section id="UserInteraction">
             <Outlet />
         </section>
-        <div id={clicked? "complete": "PostInteracting"}>
+        {/* <div id={clicked? "complete": "PostInteracting"}>
             <section className="AddPost">
                 <h3>Share your story with a post</h3>
                 <button onClick={() => setClicked(prev=>{
@@ -88,8 +82,8 @@ function HomePage(){
             ))}
 
             
-        </div>
-        <div className={clicked ? "postVisible" : "postingdisable"}>
+        </div> */}
+        {/* <div className={clicked ? "postVisible" : "postingdisable"}>
             <button onClick={() => setClicked(prev =>{
                 if(prev) document.documentElement.style.setProperty("--x","auto");
                 else document.documentElement.style.setProperty("--x","hidden");
@@ -113,7 +107,7 @@ function HomePage(){
                 <button type="submit">Post</button>
 
             </form>
-            </div>
+            </div> */}
             {/* <section id="UserInteraction">
                 <Outlet /> 
             </section> */}
