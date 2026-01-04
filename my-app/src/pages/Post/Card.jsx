@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./Card.css";
 import axios from "axios";
 
-function Card(props){
+function Card( ){
     const [post,setPost] = useState(true);
     const [isliked, setlike] = useState(false);
     const [likeCount, setLikeCount] = useState(props.likedAcc?.length || 0);
@@ -23,9 +23,9 @@ function Card(props){
         <div className="top">
             <div className="One">
                 <div className="ProfilePhoto">
-                    <img src="https://images.unsplash.com/photo-1766310549540-2de9da114f2b?q=80&w=1159&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="ProfilePhoto"/>
+                    {media && <img src={`http://localhost:3000${media}`} />}
                 </div>
-                <h3>{props.post.user.name}</h3>
+                <h3>Full Name</h3>
             </div>
             <button>Follow</button>
         </div>
@@ -35,23 +35,23 @@ function Card(props){
             <div className={isliked? "LikedAni" : "disable"}>
                 <i className="ri-heart-fill"></i>
             </div>
+            <p>{createdAt}</p>
         </div>
         <div className="bottom">
             <div className="Icons">
                 <div className="likeButton" onClick={Likedhandle}>
                 {isliked?<i className="ri-heart-fill"></i>:<i className="ri-heart-line"></i>}
-                <h6>Like</h6>
-                </div>
+                <h6>Like</h6></div>
                 <div className="commentButton"><i className="ri-chat-1-line"></i>
                 <h6>comment</h6></div>
                 <div className="shareButton"><i className="ri-share-2-line"></i>
                 <h6>share</h6></div>
                 <div className="repostbuttton"><i className="ri-arrow-go-back-line"></i>
-                <h6>repost</h6></div>
+                <h6>{ReportingObserver.length}repost</h6></div>
             </div>
             <p>{likeCount} Likes</p>
             <div className="Desciption">
-                <h3>Description </h3>
+                <h3>{description} </h3>
                 <h4>Views :</h4>
                 <input type="text" placeholder="Add a Comment..."/>
             </div>

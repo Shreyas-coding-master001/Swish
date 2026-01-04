@@ -1,136 +1,333 @@
-@keyframes LikedAnimation{
-    0%{
+@keyframes LikedAnimation {
+    0% {
         transform: scale(0) rotate(90deg);
+        opacity: 1;
     }
-    50%{
-        transform: scale(1) rotate(0deg);
-        
+
+    50% {
+        transform: scale(1.2) rotate(0deg);
+        opacity: 1;
     }
-    100%{
-        transform: translateY(-300%);
+
+    100% {
+        transform: translateY(-300%) scale(0.5);
+        opacity: 0;
     }
 }
 
-.Post{  
-    padding: 1rem;
-    margin-top: 2rem;
-    background: radial-gradient(darkblue,black);
-    border: 1px solid white;
-    border-radius: 10px;
+.Post {
+    padding: 1.5rem;
+    background-color: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    width: 100%;
     max-width: 425px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    color: white;
 }
 
-.Post .top{
+.Post:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+.Post .top {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    margin-bottom: 1rem;
+    gap: 1rem;
 }
-.top .One{
+
+.top .One {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    text-align: center;
+    gap: 0.8rem;
+    flex: 1;
+    min-width: 0;
 }
 
-.ProfilePhoto{
-    background-color: #fff;
+.top .One h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: white;
+}
+
+.ProfilePhoto {
+    background-color: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
     overflow: hidden;
-    width: 12%;
+    width: 45px;
+    height: 45px;
+    min-width: 45px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.2s ease;
 }
 
-.LikedAni{
-    font-size: 3rem;
+.ProfilePhoto:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.05);
+}
+
+.ProfilePhoto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.Post .top button {
+    padding: 0.5rem 1.2rem;
+    background-color: #1e90ff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(30, 144, 255, 0.3);
+}
+
+.Post .top button:hover {
+    background-color: #1c7ed6;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(30, 144, 255, 0.4);
+}
+
+.Post .top button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(30, 144, 255, 0.3);
+}
+
+.Post .displaySection {
+    margin: 1rem 0;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background-color: rgba(0, 0, 0, 0.3);
+    aspect-ratio: 1;
+    max-height: 500px;
+}
+
+.Post .displaySection img,
+.Post .displaySection video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    pointer-events: none;
+    user-select: none;
+}
+
+.LikedAni {
+    font-size: 4rem;
     position: absolute;
-    top:40%;
-    left: 40%;
-    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     animation: LikedAnimation 1s forwards;
-}
-.LikedAni i{
-    background: linear-gradient(to right bottom,red,pink);
-    background-clip: text;   
-    color: transparent;
-    transition: all 0.5s linear;
+    pointer-events: none;
+    z-index: 10;
 }
 
-.disable{
+.LikedAni i {
+    background: linear-gradient(135deg, #ff0844, #ff5c8d);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 10px rgba(255, 8, 68, 0.5));
+}
+
+.disable {
     display: none;
 }
 
-.top .ProfilePhoto img{
-    width: 100%;
-    object-fit: cover;
-    object-position: center;
-    height: 100%;
-}
-
-.Post .displaySection{
-    /* height: 30vh; */
-    margin: 1rem;    
-    position: relative;
-    overflow: hidden;
-}
-
-.Post .top button:active{
-    scale: 0.9;
-}
-
-.Post .top button{
-    color: black;
-    border: 2px solid black;
-    padding: 0.5rem;
-    border-radius: 50px;
-    width: 70%;
-}
-
-.Post .displaySection img, .Post .displaySection video{
-    width: 100%;
-    object-fit: contain;
-    object-position: center;
-    pointer-events: none;
-}
-
-.Post .bottom .Icons{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-    padding: 0.2rem 1rem;
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-    width: 80%;
-    text-align: center;
-}
-.Post .bottom i,.Post .bottom i h6{
-    pointer-events: none;
-}
-.Post .bottom div{
-    cursor: pointer;
-}
-.Post .bottom div .ri-heart-fill{
-    color: crimson;
-}
-
-.Post .Desciption{
+.Post .bottom {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-}   
-
-.Desciption h4{
-    color: gray;
-    font-family: Font1;
 }
 
-.Desciption input{
+.Post .bottom .Icons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0.8rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.Post .bottom .Icons>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    cursor: pointer;
     padding: 0.5rem;
-    background-color: rgba(0, 0, 0, 0.5);
-    border: none;
-    border-radius: 5px;
-    color: whitesmoke;
-    box-shadow: inset 0 0 0.5rem rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.Post .bottom .Icons>div:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.Post .bottom .Icons>div:active {
+    transform: translateY(0);
+}
+
+.Post .bottom .Icons i {
+.Post .bottom > p {
+    margin: 1rem;
+    font-size: 1rem;
+    color: gray;
+}
+
+.Post .bottom .Icons>div:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.Post .bottom .Icons>div:active {
+    transform: translateY(0);
+}
+
+.Post .bottom .Icons i {
+    font-size: 1.4rem;
+    pointer-events: none;
+    transition: all 0.2s ease;
+}
+
+.Post .bottom .Icons h6 {
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin: 0;
+    pointer-events: none;
+    opacity: 0.9;
+    text-transform: capitalize;
+}
+
+.Post .bottom .likeButton .ri-heart-fill {
+    color: #ff0844;
+    animation: heartBeat 0.3s ease;
+}
+
+@keyframes heartBeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+.Post .bottom .likeButton:hover i {
+    color: #ff0844;
+}
+
+.Post .bottom .commentButton:hover i {
+    color: #1e90ff;
+}
+
+.Post .bottom .shareButton:hover i {
+    color: #00ff88;
+}
+
+.Post .bottom .repostbuttton:hover i {
+    color: #ffaa00;
+}
+    pointer-events: none;
+    opacity: 0.9;
+    text-transform: capitalize;
+}
+
+.Post .bottom .likeButton .ri-heart-fill {
+    color: #ff0844;
+    animation: heartBeat 0.3s ease;
+}
+
+@keyframes heartBeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+.Post .bottom .likeButton:hover i {
+    color: #ff0844;
+}
+
+.Post .bottom .commentButton:hover i {
+    color: #1e90ff;
+}
+
+.Post .bottom .shareButton:hover i {
+    color: #00ff88;
+}
+
+.Post .bottom .repostbuttton:hover i {
+    color: #ffaa00;
+}
+
+.Post .Desciption {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.Desciption h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0;
+    color: white;
+    line-height: 1.5;
+}
+
+.Desciption h4 {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+    font-weight: 400;
+}
+
+.Desciption input {
+    padding: 0.8rem 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    color: white;
+    font-size: 0.9rem;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.Desciption input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.Desciption input:focus {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.1);
 }
 
 .bottom>p{
@@ -139,3 +336,85 @@
     color: gray;
 }
 
+@media (max-width: 768px) {
+    .Post {
+        padding: 1.2rem;
+        max-width: 100%;
+    }
+
+    .Post .displaySection {
+        max-height: 400px;
+    }
+
+    .Post .bottom .Icons i {
+        font-size: 1.2rem;
+    }
+
+    .Post .bottom .Icons h6 {
+        font-size: 0.7rem;
+    }
+
+    .LikedAni {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .Post {
+        padding: 1rem;
+        border-radius: 12px;
+    }
+
+    .ProfilePhoto {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+    }
+
+    .top .One h3 {
+        font-size: 0.9rem;
+    }
+
+    .Post .top button {
+        padding: 0.4rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    .Post .displaySection {
+        max-height: 350px;
+        margin: 0.8rem 0;
+    }
+
+    .Post .bottom .Icons {
+        padding: 0.6rem 0;
+    }
+
+    .Post .bottom .Icons>div {
+        padding: 0.4rem;
+    }
+
+    .Post .bottom .Icons i {
+        font-size: 1.1rem;
+    }
+
+    .Post .bottom .Icons h6 {
+        font-size: 0.65rem;
+    }
+
+    .Desciption h3 {
+        font-size: 0.85rem;
+    }
+
+    .Desciption h4 {
+        font-size: 0.8rem;
+    }
+
+    .Desciption input {
+        padding: 0.7rem 0.9rem;
+        font-size: 0.85rem;
+    }
+
+    .LikedAni {
+        font-size: 2.5rem;
+    }
+}

@@ -1,0 +1,271 @@
+.custum-file-upload {
+    height: 220px;
+    width: 100%;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    cursor: pointer;
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.custum-file-upload::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(30, 144, 255, 0.1), rgba(28, 126, 214, 0.05));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.custum-file-upload:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+}
+
+.custum-file-upload:hover::before {
+    opacity: 1;
+}
+
+.custum-file-upload:active {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.custum-file-upload .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.custum-file-upload:hover .icon {
+    transform: scale(1.1);
+}
+
+.custum-file-upload .icon svg {
+    height: 90px;
+    width: 90px;
+    fill: rgba(255, 255, 255, 0.8);
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+    transition: all 0.3s ease;
+}
+
+.custum-file-upload:hover .icon svg {
+    fill: rgba(30, 144, 255, 0.9);
+    filter: drop-shadow(0 6px 16px rgba(30, 144, 255, 0.4));
+}
+
+.custum-file-upload .text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.custum-file-upload .text span {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.custum-file-upload:hover .text span {
+    color: white;
+    font-weight: 600;
+}
+
+.custum-file-upload input {
+    display: none;
+}
+
+.custum-file-upload.has-file {
+    border-color: rgba(30, 144, 255, 0.6);
+    background-color: rgba(30, 144, 255, 0.1);
+}
+
+.custum-file-upload.has-file .icon svg {
+    fill: rgba(30, 144, 255, 1);
+}
+
+.custum-file-upload.drag-over {
+    border-color: rgba(30, 144, 255, 0.8);
+    background-color: rgba(30, 144, 255, 0.15);
+    transform: scale(1.02);
+}
+
+.custum-file-upload.compact {
+    height: 160px;
+    max-width: 280px;
+    padding: 1.5rem;
+    gap: 0.8rem;
+}
+
+.custum-file-upload.compact .icon svg {
+    height: 70px;
+    width: 70px;
+}
+
+.custum-file-upload.compact .text span {
+    font-size: 0.85rem;
+}
+
+.custum-file-upload.inline {
+    flex-direction: row;
+    height: auto;
+    width: 100%;
+    max-width: 100%;
+    padding: 1.2rem 1.5rem;
+    gap: 1rem;
+}
+
+.custum-file-upload.inline .icon svg {
+    height: 50px;
+    width: 50px;
+}
+
+.custum-file-upload.inline .text {
+    flex: 1;
+    text-align: left;
+}
+
+.custum-file-upload.uploading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.custum-file-upload.uploading::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(30, 144, 255, 0.3),
+            transparent);
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.custum-file-upload.success {
+    border-color: rgba(0, 255, 136, 0.6);
+    background-color: rgba(0, 255, 136, 0.1);
+}
+
+.custum-file-upload.success .icon svg {
+    fill: rgba(0, 255, 136, 1);
+}
+
+.custum-file-upload.error {
+    border-color: rgba(255, 68, 68, 0.6);
+    background-color: rgba(255, 68, 68, 0.1);
+}
+
+.custum-file-upload.error .icon svg {
+    fill: rgba(255, 68, 68, 1);
+}
+
+@media (max-width: 768px) {
+    .custum-file-upload {
+        height: 200px;
+        max-width: 320px;
+        padding: 1.5rem;
+        gap: 1rem;
+    }
+
+    .custum-file-upload .icon svg {
+        height: 80px;
+        width: 80px;
+    }
+
+    .custum-file-upload .text span {
+        font-size: 0.9rem;
+    }
+
+    .custum-file-upload.inline {
+        padding: 1rem 1.2rem;
+    }
+
+    .custum-file-upload.inline .icon svg {
+        height: 45px;
+        width: 45px;
+    }
+}
+
+@media (max-width: 480px) {
+    .custum-file-upload {
+        height: 180px;
+        max-width: 100%;
+        padding: 1.2rem;
+        gap: 0.8rem;
+    }
+
+    .custum-file-upload .icon svg {
+        height: 70px;
+        width: 70px;
+    }
+
+    .custum-file-upload .text span {
+        font-size: 0.85rem;
+    }
+
+    .custum-file-upload.inline {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .custum-file-upload.inline .text {
+        text-align: center;
+    }
+
+    .custum-file-upload.compact {
+        height: 150px;
+        padding: 1rem;
+    }
+
+    .custum-file-upload.compact .icon svg {
+        height: 60px;
+        width: 60px;
+    }
+}
+
+.custum-file-upload:focus-within {
+    outline: 2px solid rgba(30, 144, 255, 0.5);
+    outline-offset: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .custum-file-upload {
+        border-color: rgba(255, 255, 255, 0.25);
+        background-color: rgba(255, 255, 255, 0.06);
+    }
+
+    .custum-file-upload:hover {
+        border-color: rgba(255, 255, 255, 0.45);
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+}

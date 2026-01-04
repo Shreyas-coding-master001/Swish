@@ -1,8 +1,8 @@
 import "./HomePage.css";
 import { Routes,Route, useNavigate } from "react-router-dom";
 import Logo from "../assets/Logo-removebg-preview.png";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import PostSection from "../UI Components/PostUpload";
 import Card from "../pages/Post/Card";
 import axios from "axios";
@@ -63,8 +63,15 @@ function HomePage(){
             <Link to="" className="LINKS">Home</Link>
             <Link to="profile" className="LINKS">Profile</Link>
             <Link to="community" className="LINKS">Community</Link>
+            <Link to="people" className="LINKS">People</Link>
+            <Link className="LINKS">About</Link>
+            <Link className="LINKS">Contact</Link>
         </nav>
         <div className="target"></div>
+
+         <section id="UserInteraction">
+            <Outlet />
+        </section>
         <div id={clicked? "complete": "PostInteracting"}>
             <section className="AddPost">
                 <h3>Share your story with a post</h3>

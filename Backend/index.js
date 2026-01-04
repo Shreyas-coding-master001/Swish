@@ -1,6 +1,8 @@
+require("dotenv").config();
+
 const express = require("express");
 const cors = require("cors");
-const app = express();
+const cookieParser = require("cookie-parser");
 const connectDB = require("./config/db");
 const Port = process.env.PORT || 3000;
 const authSection = require("./controllers/authSection")
@@ -10,9 +12,10 @@ const cookieParser = require("cookie-parser");
 const postModel = require("./module/post");
 const ChnagesPost = require("./controllers/ChnagesPost");
 
-require("dotenv").config();
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-app.set("view engine","ejs");
+app.set("view engine", "ejs");
 
 connectDB();
 
@@ -26,12 +29,14 @@ app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use("/api/auth",authSection);
 app.use("/post",ChnagesPost);
+
 app.use("/uploads", express.static("uploads"));
 
 // app.use(express.static(path.join(__dirname, "public")));
+app.use("/api/auth", authSection);
 
-app.get("/",(req,res)=>{
-    res.render("index");
+app.get("/", (req, res) => {
+  res.render("index");
 });
 
 app.get("/DisplayPost",isLogged, async (req,res)=>{

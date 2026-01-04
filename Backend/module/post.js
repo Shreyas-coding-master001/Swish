@@ -1,3 +1,20 @@
+// const mongoose = require("mongoose");
+
+// const userSchema = new mongoose.Schema({
+//   profilePhoto: {type: String, required: false, trim: true},
+//   name: {type: String, required: false, trim: true},
+//   isfollowed: {type: Boolean, default: false},
+//   isliked: {type: Boolean, default: false},
+//   repost: {type:Boolean, default: false},
+//   share: {type:Boolean, default: false},
+//   views: {type:Boolean, default:false },
+//   Descprition: {type: String, required: false, trim: true, default: ""},
+//   Community: {type: String, required: true, trim: true},
+//   comments : {type: Array}
+// });
+
+// module.exports = mongoose.model("post",userSchema);
+
 const mongoose = require("mongoose");
 
 const userSechema = new mongoose.Schema({
@@ -18,4 +35,4 @@ const userSechema = new mongoose.Schema({
   Post : {type:String, required:true, trim: true}
 });
 
-module.exports = mongoose.model("post",userSechema);
+module.exports = mongoose.model("Post", postSchema);

@@ -1,0 +1,206 @@
+.people-container {
+    width: 90vw;
+    height: 85vh;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+
+.top-section-people {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.8rem 2.5rem;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    gap: 2rem;
+    backdrop-filter: blur(10px);
+    flex-shrink: 0;
+}
+
+.top-section-people>div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+}
+
+.search-bar-people {
+    flex: 1;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.08);
+    color: white;
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-bar-people::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.search-bar-people:focus {
+    border-color: rgba(30, 144, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.1);
+}
+
+.search-button-people {
+    padding: 0.75rem 2.5rem;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(135deg, #1e90ff 0%, #1c7ed6 100%);
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(30, 144, 255, 0.3);
+}
+
+.search-button-people:hover {
+    background: linear-gradient(135deg, #1c7ed6 0%, #1a73c7 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(30, 144, 255, 0.4);
+}
+
+.search-button-people:active {
+    transform: translateY(0);
+}
+
+.top-section-people select {
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.08);
+    color: white;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+    min-width: 140px;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='white' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 3rem;
+}
+
+.top-section-people select:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.top-section-people select:focus {
+    border-color: rgba(30, 144, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.1);
+}
+
+.top-section-people select option {
+    background-color: #000064;
+    color: white;
+    padding: 0.5rem;
+}
+
+.bottom-section-people {
+    flex: 1;
+    padding: 2.5rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    min-height: 0;
+}
+
+.bottom-section-people::-webkit-scrollbar {
+    width: 10px;
+}
+
+.bottom-section-people::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 5px;
+}
+
+.bottom-section-people::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.bottom-section-people::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.faculty-section-people,
+.alumni-section-people,
+.students-section-people {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.faculty-label-people,
+.alumni-label-people,
+.students-label-people {
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0;
+    font-family: Font4, sans-serif;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.faculty-section-people hr,
+.alumni-section-people hr,
+.students-section-people hr {
+    border: none;
+    border-top: 2px solid rgba(255, 255, 255, 0.15);
+    margin: 0;
+}
+
+.faculty-container-people,
+.alumni-container-people,
+.students-container-people {
+    display: flex;
+    flex-direction: row;
+    gap: 1.8rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 1rem 0.5rem;
+    scroll-behavior: smooth;
+}
+
+.faculty-container-people::-webkit-scrollbar,
+.alumni-container-people::-webkit-scrollbar,
+.students-container-people::-webkit-scrollbar {
+    height: 10px;
+}
+
+.faculty-container-people::-webkit-scrollbar-track,
+.alumni-container-people::-webkit-scrollbar-track,
+.students-container-people::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 5px;
+    margin: 0 0.5rem;
+}
+
+.faculty-container-people::-webkit-scrollbar-thumb,
+.alumni-container-people::-webkit-scrollbar-thumb,
+.students-container-people::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.faculty-container-people::-webkit-scrollbar-thumb:hover,
+.alumni-container-people::-webkit-scrollbar-thumb:hover,
+.students-container-people::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
