@@ -23,7 +23,7 @@ app.use(cors({
   credentials: true
 }));
 
-app.use(express.json())
+app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use("/api/auth",authSection);
@@ -40,8 +40,6 @@ app.get("/", (req, res) => {
 
 app.get("/DisplayPost",isLogged, async (req,res)=>{
   const user = req.user;
-
-  console.log("In DisplayPost");
   
   const posts = await postModel.find({Community: user.college}).populate("user")
   .then(data=>res.send(data.reverse()))

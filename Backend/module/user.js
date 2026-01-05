@@ -11,7 +11,8 @@ const userSchema = new mongoose.Schema({
         bio : {type: String, trim: true, required: true},
         department : {type:String, trim: true},
         interests : {type:String, trim: true},
-        posts: [{type: mongoose.Schema.Types.ObjectId,ref: "post"}]
+        posts: [{type: mongoose.Schema.Types.ObjectId,ref: "post"}],
+        followedAcc : [{type : mongoose.Schema.Types.ObjectId ,ref: "post"}]
     },
     {timestamps: true}
 );

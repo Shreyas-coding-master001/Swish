@@ -9,7 +9,6 @@ function Feed(){
     const [clicked,setClicked] = useState(false);
     const [description,setDescription] = useState("");
     const [media, setMedia] = useState(null);
-    const [error, setError] = useState("");
     const [posts, setPosts] = useState([]);
 
     // useEffect(() => {

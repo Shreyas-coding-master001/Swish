@@ -43,7 +43,7 @@
     gap: 1rem;
 }
 
-.top .One {
+.One {
     display: flex;
     align-items: center;
     gap: 0.8rem;
@@ -104,8 +104,17 @@
     box-shadow: 0 6px 16px rgba(30, 144, 255, 0.4);
 }
 
+.Post .top .Unfollowbutton{
+    background-color: #fff;
+    color: #1c7ed6;
+}
+.Post .top .Unfollowbutton:hover{
+    background-color: whitesmoke;
+    color: #1c7ed6;
+}
+
 .Post .top button:active {
-    transform: translateY(0);
+    transform: translateY(0) scale(0.95);
     box-shadow: 0 2px 8px rgba(30, 144, 255, 0.3);
 }
 
@@ -159,6 +168,7 @@
 }
 
 .Post .bottom .Icons {
+    cursor: pointer;
     text-align: center;
     display: flex;
     justify-content: space-around;
@@ -179,8 +189,9 @@
     flex-direction: column;
     gap: 0.5rem;
 }
+
 .bottom .Desciption input{
-    width: 100%;
+    width: 90%;
     background-color: black;
     border: none;
     padding: 0.5rem;
@@ -188,8 +199,72 @@
     border-radius: 10px;
 }
 
+.Desciption .One button{
+    color: black;
+    background-color: black;
+    font-size: 0.7rem;
+    padding: 0.2rem;
+    border-radius: 5px;
+}
+
 .Desciption span{
     font-weight: 500;
     color: rgba(245, 245, 245, 0.9);
 }
 
+.bottom .Icons .commentButton h6, .commentButton i{
+    pointer-events: none;
+}
+
+.bottom .Desciption .commentBox{
+    background-color: whitesmoke;
+    border-radius: 10px;
+    padding: 0.2rem;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.commentBox .comment{
+    background-color: black;
+    width: 100%;
+    border-radius: 10px;
+    padding: 0.5rem;
+}
+.commentBox .comment .One{
+    display: flex;
+    text-align: center;
+    align-items: end;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+
+.comment .One h3{
+    font-size: 1.5rem;
+}
+.comment .One .ProfilePhoto{
+    height: 30px;
+}
+
+.commentBox .comment p{
+    color: whitesmoke;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+@media (max-width : 500px){
+
+    .Desciption .One button{
+        height: 1.5rem;
+        width: 1.5rem;
+    }
+
+    .Desciption .One button i{ 
+        background: white;
+        font-size: 2rem;
+        pointer-events: none;
+    }
+
+}

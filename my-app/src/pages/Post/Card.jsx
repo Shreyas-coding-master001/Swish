@@ -4,11 +4,22 @@ import axios from "axios";
 
 // function Card({ description, media, author, likes,reposts, createdAt }){
 function Card(props){
-    const [post,setPost] = useState(true);
-    const [isliked, setlike] = useState(false);
+    const [postType,setPost] = useState(true);
+    const [value,setvalue] = useState("");
+    const [isliked, setlike] = useState(props.post.likedAcc.indexOf(props.post.user._id) === -1 ? false : true);
+    const [isfollowed, setfollowed] = useState({
+      followed : props.post.user.followedAcc.indexOf(props.post.user._id) === -1? false : true,
+
+    });
+
+    const [commentButton , setComments] = useState({
+      comments :  props.post.Comments,
+      isClcked : false
+    })
     const [likeCount, setLikeCount] = useState(props.likedAcc?.length || 0);
 
     const Likedhandle = async () => { 
+
         await axios.post(`http://localhost:3000/post/like/${props.post._id}`, {},{
             withCredentials: true
         }).then(res => {
@@ -18,6 +29,35 @@ function Card(props){
         })
         .catch(err => console.error(err.message))
     }
+
+    const Followhandle =  async function(){
+      
+      await axios.post(`http://localhost:3000/post/follow/${props.post.user._id}`,{}, {withCredentials: true})
+      .then(res => setfollowed(prev => ({
+        ...prev,
+        followed: res.data
+      })))
+      .catch(err => console.error(err));
+
+    }
+
+    const handleComment = (eve)=>{
+      setComments(prev =>({
+        ...prev,
+        isClcked : !prev.isClcked
+      }))
+    }
+
+    const handleCommentSend = async function(eve){
+      await axios.post(`http://localhost:3000/post/comment/${props.post._id}`,{value}, {withCredentials: true})
+      .then(res => {setComments(prev => ({
+        ...prev,
+        comments: res.data
+        }))
+      })
+      .catch(err => console.error(err));
+    }
+
     const image = props.post.Post;
     return (
     <div className="Post">
@@ -28,11 +68,14 @@ function Card(props){
           </div>
           <h3>{props.post.user?.name}</h3>
         </div>
-        <button>Follow</button>
+        {
+          isfollowed.followed? <button className="Unfollowbutton" onClick={Followhandle}>Unfollow</button>:
+          <button  onClick={Followhandle}>Follow</button>
+        }
       </div>
 
       <div className="displaySection" onDoubleClick={Likedhandle}>
-        {post ? (
+        {postType ? (
           <img src={`http://localhost:3000${image}`} alt="Post" />
         ) : (
           <video src={`http://localhost:3000${image}`} autoPlay muted />
@@ -52,7 +95,7 @@ function Card(props){
             <h6>Like</h6>
           </div>
 
-          <div className="commentButton">
+          <div className="commentButton" onClick={handleComment}>
             <i className="ri-chat-1-line"></i>
             <h6>comment</h6>
           </div>
@@ -73,7 +116,36 @@ function Card(props){
 
         <div className="Desciption">
             <h3>Describe: <span>{props.post.Descprition}</span></h3>
-            <input type="text" placeholder="Add a Comment..." />
+              <form onSubmit={handleCommentSend} className="One">
+                <input type="text" placeholder="Add a Comment..."  onChange={e => {
+                  setvalue(e.target.value);
+                }} value={value} />
+                <button type="submit" onClick={handleCommentSend}><i className="ri-send-plane-2-fill"></i></button>
+              </form>
+
+            {commentButton.isClcked? 
+              <div className="commentBox">
+                {props.post.Comments && props.post.Comments.length > 0 ? (
+                  props.post.Comments.map((comment, idx) => (
+                    <div className="comment" key={idx}>
+                      <div className="One">
+                        <div className="ProfilePhoto">
+                          {props.post.user.profileImage && (
+                            <img src={`http://localhost:3000${props.post.user.profileImage}`} alt="" />
+                          )}
+                        </div>
+                        <h3>{props.post.user?.name}</h3>
+                      </div>
+                      <p>{comment}</p>
+                    </div>
+                  ))
+                ) : (
+                  <h3 style={{color: "black"}}>No Comments Yet!!</h3>
+                )}
+
+              </div>
+              : <div className="disable"> </div>
+            }
         </div>
       </div>
     </div>

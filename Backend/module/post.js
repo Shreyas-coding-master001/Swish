@@ -20,11 +20,7 @@ const mongoose = require("mongoose");
 const postSchema = new mongoose.Schema(
   {
   user: {type: mongoose.Schema.Types.ObjectId, required: true, trim: true, ref: "users"},
-
-  followedAcc: [{type: mongoose.Schema.Types.ObjectId,
-    ref: "users"
-  }],
-
+  
   likedAcc: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "users"
@@ -32,9 +28,7 @@ const postSchema = new mongoose.Schema(
 
   Descprition: {type: String, required: false, trim: true, default: ""},
 
-  Comments : [{type: mongoose.Schema.Types.ObjectId,
-    ref: "comment"
-  }],
+  Comments : [{type: String, trim: true }],
 
   Post : {type:String, required:true, trim: true},
 
