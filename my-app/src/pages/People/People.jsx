@@ -6,7 +6,7 @@ import "./People.css";
 function People() {
   const [peoples, setPeoples] = useState([]);
 
-  useEffect(() => {
+  useEffect(() => { 
     const fetchPeoples = async () => {
       try {
         const res = await axios.get(

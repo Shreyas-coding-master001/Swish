@@ -18,7 +18,7 @@ function Profile(){
             setProfileImage(imageData); 
 
             await axios.put(
-                "http://localhost:3000/api/auth/profile-image",
+                "http://localhost:3000/profile-image",
                 { profileImage: imageData },
                 { withCredentials: true }
             );
@@ -27,19 +27,20 @@ function Profile(){
     };
 
     useEffect(() => {
-    axios
-        .get("http://localhost:3000/api/auth/profile", {
-        withCredentials: true
-        })
-        .then(res => {
-        setUser(res.data);
-        setBio(res.data.bio || "");
-        setProfileImage(res.data.profileImage || null);
-        })
-        .catch(err => {
-        console.log("Profile fetch failed:", err);
-        });
+        axios
+            .get("http://localhost:3000/api/auth/profile", {
+            withCredentials: true
+            })
+            .then(res => {
+            setUser(res.data);
+            setBio(res.data.bio || "");
+            setProfileImage(res.data.profileImage || null);
+            })
+            .catch(err => {
+            console.log("Profile fetch failed:", err.message);
+            });
     }, []);
+
 
 
 
@@ -53,17 +54,18 @@ function Profile(){
                 <div className="left-section-profile">
                     <input ref={fileInputRef} type="file" accept="image/*" className="profile-input" onChange={handleImageUpload} />
                     <div className="profile-image-wrapper">
-                        {profileImage ? (
-                            <>
-                                <img className="profile-image" src={`http://localhost:3000${profileImage}`} alt="Profile" onClick={handleImageClick} />
-
-                                <p className="verification-batch">Verified</p>
-                            </>
+                    {profileImage ? (
+                        <img
+                            className="profile-image"
+                            src={`http://localhost:3000${profileImage}`}
+                            alt="Profile"
+                        />
                         ) : (
-                            <div className="profile-image-placeholder" onClick={handleImageClick}>
-                                Click to upload<br/>profile image
-                            </div>
-                        )}
+                        <div className="profile-image-placeholder">
+                            Click to upload profile image
+                        </div>
+                    )}
+
                     </div>
                     <p className="tag">@{user?.tag}</p>
                     
