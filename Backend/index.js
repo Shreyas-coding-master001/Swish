@@ -9,7 +9,7 @@ const authSection = require("./controllers/authSection")
 const uploads = require("./config/multer");
 const isLogged = require("./Middleware/Loggedin");
 const postModel = require("./module/post");
-const ChnagesPost = require("./controllers/ChnagesPost");
+const ChnagesPost = require("./controllers/ChangesPost");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -32,7 +32,6 @@ app.use("/post",ChnagesPost);
 app.use("/uploads", express.static("uploads"));
 
 // app.use(express.static(path.join(__dirname, "public")));
-app.use("/api/auth", authSection);
 
 app.get("/", (req, res) => {
   res.render("index");
@@ -57,11 +56,12 @@ app.post("/postInput", isLogged, uploads.single("media"), async (req,res)=>{
     user.posts.push(data._id);
     console.log("Data Send");
   }).catch(err=> res.status(400).send(err.message));
-
+ 
   await user.save();
 
   res.redirect("/DisplayPost")
 });
+
 
 app.get("/logout",(req,res)=>{
   res.cookie("token","")
