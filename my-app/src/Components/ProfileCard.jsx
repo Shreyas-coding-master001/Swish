@@ -85,7 +85,7 @@ function ProfileCard({ user, onClose }) {
                 </div>
             </div>
         </div>
-    );
+    ); 
 }
 
 export default ProfileCard;
