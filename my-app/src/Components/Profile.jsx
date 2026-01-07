@@ -1,12 +1,29 @@
 import { useState, useRef, useEffect } from "react";
 import "./Profile.css";
 import axios from "axios";
+import Card from "../pages/Post/Card";
 
 function Profile(){
     const [profileImage, setProfileImage] = useState(null);
+    const [name,setName] = useState("");
+    const [tag,setTag] = useState("");
     const [bio, setBio] = useState("");
     const fileInputRef = useRef(null);
     const [user,setUser] = useState(null);
+    const [edit,setEdit] = useState(false);
+    const [error,setError] = useState("");
+    const [posts, setPosts] = useState([]);
+    const [followers,setFollowers] = useState(0);
+
+    useEffect(function(){
+        axios.get("http://localhost:3000/DisplayPost", {
+            withCredentials: true
+        })
+        .then(res => setPosts(res.data))
+        .catch(err => console.error(err.message));
+    },[]);
+
+    
 
     const handleImageUpload = async (e) => {
         const file = e.target.files[0];
@@ -41,7 +58,32 @@ function Profile(){
             });
     }, []);
 
+    function handleEdit(){
+        setEdit(!edit);
+    }
 
+    const editDetails = async (e) => {
+        e.preventDefault();
+
+        try {
+            const formData = new FormData();
+            formData.append("name", name);
+            formData.append("tag", tag);
+            formData.append("bio", bio);
+
+            const res = await axios.patch("http://localhost:3000/api/auth/profile",formData,{withCredentials: true});
+
+            console.log("Profile updated:", res.data);
+            setEdit(!edit);
+        } catch (err) {
+            if (err.response?.data?.message) {
+            setError(err.response.data.message);
+            } else {
+            setError("Something went wrong. Please try again.");
+            }
+            setEdit(!edit);
+        }
+    };
 
 
     const handleImageClick = () => {
@@ -67,11 +109,21 @@ function Profile(){
                     )}
 
                     </div>
-                    <p className="tag">@{user?.tag}</p>
+                    {edit ? (
+                        <input className="tag-input-profile" placeholder={"@" + user?.tag} value={tag} onChange={(e)=>setTag(e.target.value)}/>
+                    ):(
+                        <p className="tag">@{user?.tag}</p>
+                    )}
                     
                     <div className="action-buttons">
-                        <button className="follow-button">Follow</button>
-                        <button className="message-button">Message</button>
+                        {edit? (
+                            <div className="cancel-save-button-profile">
+                                <button className="cancel-button-profile" onClick={handleEdit}>Cancel</button>
+                                <button className="save-button-profile" onClick={editDetails}>Save</button>
+                            </div>
+                        ): (
+                            <button className="update-button" onClick={handleEdit}>Update Profile</button>
+                        )}
                     </div>
 
                     <div className="communities-section">
@@ -84,11 +136,24 @@ function Profile(){
 
                 <div className="right-section-profile">
                     <div className="name-role-section">
-                        <p className="name">{user?.name}</p>
-                        <span className="role">{user?.role}</span>
+                        {edit? (
+                            <div className="name-role-input-profile">
+                                <input className="name-input-profile" placeholder={user?.name} value={name} onChange={(e)=>setName(e.target.value)}/>
+                                <span className="role">{user?.role}</span>
+                            </div>
+                        ):(
+                            <div className="name-role-profile">
+                                <p className="name">{user?.name}</p>
+                                <span className="role">{user?.role}</span>
+                            </div>
+                        )}
                     </div>
                     
-                    <input className="bio-input" placeholder="Describe yourself in short" value={bio} onChange={(e) => setBio(e.target.value)}/>
+                    {edit? (
+                        <input className="bio-input" placeholder="Describe yourself in short" value={bio} onChange={(e) => setBio(e.target.value)}/>
+                    ):(
+                        <p className="bio">{bio}</p>
+                    )}
                     {/* {bio && (
                         <p className="bio">{bio}</p>
                     )} */}
@@ -103,15 +168,11 @@ function Profile(){
                     </div>
                     
                     <div className="post-section">
-                        <div className="post">Post 1</div>
-                        <div className="post">Post 2</div>
-                        <div className="post">Post 3</div>
-                        <div className="post">Post 4</div>
-                        <div className="post">Post 5</div>
-                        <div className="post">Post 6</div>
-                        <div className="post">Post 7</div>
-                        <div className="post">Post 8</div>
-                        <div className="post">Post 9</div>
+                        {posts.map(post => (
+                            <div className="Cardbox" key={post._id}>
+                                <Card post={post} />
+                            </div>
+                        ))}
                     </div>
                 </div>              
             </div>
