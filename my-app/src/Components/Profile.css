@@ -100,6 +100,31 @@
     margin: 0.3rem 0;
 }
 
+/* NEW: Tag input styling for edit mode */
+.tag-input-profile {
+    width: 100%;
+    max-width: 200px;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    outline: none;
+    font-size: 0.85rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    text-align: center;
+    transition: all 0.2s ease;
+    margin: 0.3rem 0;
+}
+
+.tag-input-profile::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.tag-input-profile:focus {
+    border-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
 .action-buttons {
     display: flex;
     flex-direction: row;
@@ -108,10 +133,10 @@
     margin-bottom: 0.5rem;
 }
 
-.follow-button,
-.message-button {
-    flex: 1;
+.update-button {
     padding: 0.5rem 1.1rem;
+    width:10vw;
+    margin-left:3.24vw;
     border-radius: 20px;
     font-size: 0.85rem;
     font-weight: 500;
@@ -129,13 +154,59 @@
     background-color: #1c7ed6;
 }
 
-.message-button {
+.update-button {
     background-color: white;
     color: black;
 }
 
-.message-button:hover {
+.update-button:hover {
     background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* NEW: Cancel and Save buttons container for edit mode */
+.cancel-save-button-profile {
+    display: flex;
+    flex-direction: row;
+    gap: 0.6rem;
+    width: 100%;
+    justify-content: center;
+}
+
+/* NEW: Cancel button styling */
+.cancel-button-profile {
+    padding: 0.5rem 1.1rem;
+    flex: 1;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background-color: transparent;
+    color: white;
+}
+
+.cancel-button-profile:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.7);
+}
+
+/* NEW: Save button styling */
+.save-button-profile {
+    padding: 0.5rem 1.1rem;
+    flex: 1;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    background-color: #1e90ff;
+    color: white;
+}
+
+.save-button-profile:hover {
+    background-color: #1c7ed6;
 }
 
 .communities-section {
@@ -193,6 +264,69 @@
 }
 
 .name-role-section {
+    display: flex;
+    flex-direction: row;
+    gap: 0.8rem;
+    align-items: center;
+}
+
+/* NEW: Name and role input container for edit mode */
+.name-role-input-profile {
+    display: flex;
+    flex-direction: row;
+    gap: 0.8rem;
+    align-items: center;
+    width: 100%;
+}
+
+/* NEW: Name input styling for edit mode */
+.name-input-profile {
+    flex: 1;
+    padding: 0.5rem 0.8rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    outline: none;
+    font-size: 1.5rem;
+    font-weight: 600;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    transition: all 0.2s ease;
+}
+
+.name-input-profile::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.name-input-profile:focus {
+    border-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* NEW: Role input styling for edit mode */
+.role-input-profile {
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    outline: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    background-color: rgba(128, 128, 128, 0.4);
+    color: white;
+    transition: all 0.2s ease;
+    min-width: 120px;
+}
+
+.role-input-profile::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.role-input-profile:focus {
+    border-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(128, 128, 128, 0.5);
+}
+
+/* Existing name-role-profile container */
+.name-role-profile {
     display: flex;
     flex-direction: row;
     gap: 0.8rem;
@@ -338,6 +472,11 @@
     .post-section {
         grid-template-columns: repeat(2, 1fr);
     }
+    
+    /* NEW: Adjust edit inputs for tablets */
+    .name-input-profile {
+        font-size: 1.3rem;
+    }
 }
 
 @media (max-width: 768px) {
@@ -386,6 +525,21 @@
         grid-template-columns: repeat(2, 1fr);
         max-height: 400px;
     }
+    
+    /* NEW: Adjust edit inputs for mobile */
+    .name-role-input-profile {
+        flex-direction: column;
+        gap: 0.6rem;
+        align-items: stretch;
+    }
+    
+    .name-input-profile {
+        font-size: 1.2rem;
+    }
+    
+    .role-input-profile {
+        width: 100%;
+    }
 }
 
 @media (max-width: 480px) {
@@ -401,5 +555,14 @@
 
     .action-buttons {
         flex-direction: column;
+    }
+    
+    /* NEW: Further mobile adjustments for edit inputs */
+    .tag-input-profile {
+        max-width: 100%;
+    }
+    
+    .name-input-profile {
+        font-size: 1.1rem;
     }
 }
