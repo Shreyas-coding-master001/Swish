@@ -107,11 +107,11 @@ function Feed(){
 
             <div className="Postbox">
                 {posts.map(post => (
-                <div className="Cardbox" key={post._id}>
-                    <Card post={post} />
-                </div>
-            ))}
-  
+                    <div className="Cardbox" key={post._id}>
+                        <Card post={post} />
+                    </div>
+                ))}
+
             </div>
         </div>
         <div className={clicked?"postVisible":"postingdisable"}>
