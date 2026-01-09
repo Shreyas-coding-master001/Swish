@@ -11,6 +11,13 @@ import PostUpload from './UI Components/PostUpload'
 import Card from "./pages/Post/Card"
 import Feed from "./Components/Feed"
 import People from "./pages/People/People";
+import AdminLayout from "./pages/admin/AdminLayout"
+import Reports from "./pages/admin/Reports"
+import Posts from "./pages/admin/Posts"
+import Communities from "./pages/admin/Communities"
+import Dashboard from "./pages/admin/Dashboard"
+import Settings from "./pages/admin/Settings"
+import Users from "./pages/admin/Users"
 
 function App() {
   const [count, setCount] = useState(0)
@@ -27,6 +34,14 @@ function App() {
           <Route path="community"element={<Community/>}/>
           <Route path="people" element={<People/>}/>
           {/* <Route path="card" element={<Card/>}/> */}
+        </Route>
+        <Route path="/admin/*" element={<AdminLayout />}>
+          <Route path="Communities" element={<Communities />}/>
+          <Route path="Dashboard"element={<Dashboard/>}/>
+          <Route path="Posts" element={<Posts/>}/>
+          <Route path="Reports" element={<Reports/>}/>
+          <Route path="Settings" element={<Settings/>}/>
+          <Route path="Users" element={<Users/>}/>
         </Route>
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
