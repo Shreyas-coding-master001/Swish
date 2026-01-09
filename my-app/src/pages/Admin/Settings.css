@@ -1,0 +1,168 @@
+.settings-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.settings-header {
+    margin-bottom: 2rem;
+}
+
+.settings-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: white;
+}
+
+.settings-subtitle {
+    font-size: 0.95rem;
+    opacity: 0.7;
+    margin: 0;
+}
+
+.settings-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.settings-section {
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.section-heading {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0 0 1.5rem 0;
+    color: white;
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.setting-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.setting-info {
+    flex: 1;
+}
+
+.setting-name {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 0.3rem 0;
+    color: white;
+}
+
+.setting-description {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    margin: 0;
+}
+
+.toggle-btn {
+    padding: 0.6rem 1.5rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 110px;
+}
+
+.toggle-btn:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.toggle-active {
+    background-color: rgba(50, 205, 50, 0.3);
+    border-color: rgba(50, 205, 50, 0.5);
+    color: rgb(144, 238, 144);
+}
+
+.toggle-active:hover {
+    background-color: rgba(50, 205, 50, 0.4);
+}
+
+.admin-info-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.admin-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.admin-detail:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.admin-label {
+    font-size: 0.8rem;
+    opacity: 0.6;
+    margin: 0;
+    font-weight: 500;
+}
+
+.admin-value {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+    color: white;
+}
+
+.admin-action-btn {
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
+    border: 1px solid rgba(30, 144, 255, 0.5);
+    background-color: rgba(30, 144, 255, 0.2);
+    color: rgb(135, 206, 250);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    align-self: flex-start;
+}
+
+.admin-action-btn:hover {
+    background-color: rgba(30, 144, 255, 0.3);
+    border-color: rgba(30, 144, 255, 0.7);
+}
+
+@media (max-width: 768px) {
+    .setting-item {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+
+    .toggle-btn {
+        width: 100%;
+    }
+
+    .admin-action-btn {
+        width: 100%;
+    }
+}
