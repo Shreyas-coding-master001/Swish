@@ -1,0 +1,229 @@
+.communities-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.communities-header {
+    margin-bottom: 2rem;
+}
+
+.communities-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: white;
+}
+
+.communities-subtitle {
+    font-size: 0.95rem;
+    opacity: 0.7;
+    margin: 0;
+}
+
+.communities-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.community-card {
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    transition: all 0.2s ease;
+}
+
+.community-card:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+}
+
+.community-card-left {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    flex: 1;
+}
+
+.community-logo-placeholder {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 3px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+}
+
+.community-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.community-name-status {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.community-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+    color: white;
+}
+
+.community-status-badge {
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.status-active {
+    background-color: rgba(50, 205, 50, 0.3);
+    color: rgb(144, 238, 144);
+}
+
+.status-pending {
+    background-color: rgba(255, 165, 0, 0.3);
+    color: rgb(255, 200, 100);
+}
+
+.status-disabled {
+    background-color: rgba(128, 128, 128, 0.3);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.community-description {
+    font-size: 0.9rem;
+    opacity: 0.85;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.community-members {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    margin: 0;
+    font-weight: 500;
+}
+
+.community-card-right {
+    display: flex;
+    align-items: center;
+}
+
+.community-actions {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.community-action-btn {
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-approve {
+    background-color: rgba(50, 205, 50, 0.2);
+    color: rgb(144, 238, 144);
+    border: 1px solid rgba(50, 205, 50, 0.3);
+}
+
+.btn-approve:hover {
+    background-color: rgba(50, 205, 50, 0.3);
+}
+
+.btn-reject {
+    background-color: rgba(255, 69, 69, 0.2);
+    color: rgb(255, 140, 140);
+    border: 1px solid rgba(255, 69, 69, 0.3);
+}
+
+.btn-reject:hover {
+    background-color: rgba(255, 69, 69, 0.3);
+}
+
+.btn-disable {
+    background-color: rgba(255, 165, 0, 0.2);
+    color: rgb(255, 200, 100);
+    border: 1px solid rgba(255, 165, 0, 0.3);
+}
+
+.btn-disable:hover {
+    background-color: rgba(255, 165, 0, 0.3);
+}
+
+.btn-enable {
+    background-color: rgba(30, 144, 255, 0.2);
+    color: rgb(135, 206, 250);
+    border: 1px solid rgba(30, 144, 255, 0.3);
+}
+
+.btn-enable:hover {
+    background-color: rgba(30, 144, 255, 0.3);
+}
+
+@media (max-width: 992px) {
+    .community-card {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .community-card-left {
+        width: 100%;
+    }
+
+    .community-card-right {
+        width: 100%;
+        justify-content: stretch;
+    }
+
+    .community-actions {
+        width: 100%;
+    }
+
+    .community-action-btn {
+        flex: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .community-card-left {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .community-name-status {
+        justify-content: center;
+    }
+
+    .community-actions {
+        flex-direction: column;
+    }
+
+    .community-action-btn {
+        width: 100%;
+    }
+}
