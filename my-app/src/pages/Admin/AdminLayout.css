@@ -1,0 +1,162 @@
+.admin-layout {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), darkblue);
+    color: white;
+    overflow: hidden;
+}
+
+.admin-left-panel {
+    width: 250px;
+    min-width: 250px;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0;
+    overflow-y: auto;
+}
+
+.admin-left-panel::-webkit-scrollbar {
+    width: 6px;
+}
+
+.admin-left-panel::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+}
+
+.admin-left-panel::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+
+.admin-logo-section {
+    padding: 0 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.admin-logo-section h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+    color: white;
+}
+
+.admin-logo-section p {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    margin: 0.3rem 0 0 0;
+}
+
+.admin-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 0 1rem;
+    flex: 1;
+}
+
+.admin-nav-link {
+    padding: 0.9rem 1.2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.admin-nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.admin-nav-link:active,
+.admin-nav-link.active {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+}
+
+.admin-logout-section {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 1rem;
+}
+
+.admin-logout-link {
+    padding: 0.7rem 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: block;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.admin-logout-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: white;
+}
+
+.admin-right-panel {
+    flex: 1;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 2rem;
+}
+
+.admin-right-panel::-webkit-scrollbar {
+    width: 8px;
+}
+
+.admin-right-panel::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.admin-right-panel::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+.admin-right-panel::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 768px) {
+    .admin-layout {
+        flex-direction: column;
+    }
+
+    .admin-left-panel {
+        width: 100%;
+        min-width: auto;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 1rem 0;
+    }
+
+    .admin-nav {
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 0.5rem 1rem;
+    }
+
+    .admin-nav-link {
+        white-space: nowrap;
+    }
+
+    .admin-right-panel {
+        height: auto;
+        min-height: calc(100vh - 200px);
+        padding: 1.5rem 1rem;
+    }
+}
