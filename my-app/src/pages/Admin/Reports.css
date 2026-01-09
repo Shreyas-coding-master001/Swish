@@ -1,0 +1,275 @@
+.reports-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.reports-header {
+    margin-bottom: 2rem;
+}
+
+.reports-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: white;
+}
+
+.reports-subtitle {
+    font-size: 0.95rem;
+    opacity: 0.7;
+    margin: 0;
+}
+
+.reports-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.reports-tab {
+    padding: 0.8rem 1.5rem;
+    background-color: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: -2px;
+}
+
+.reports-tab:hover {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.tab-active {
+    color: white;
+    border-bottom-color: #1e90ff;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.reports-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.report-card {
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    transition: all 0.2s ease;
+}
+
+.report-card:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.report-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+
+.report-info-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    flex: 1;
+}
+
+.reporter-info,
+.report-reason {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.report-label {
+    font-size: 0.8rem;
+    opacity: 0.6;
+    margin: 0;
+    font-weight: 500;
+}
+
+.reporter-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0;
+    color: white;
+}
+
+.reporter-tag {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    font-weight: 400;
+}
+
+.reason-badge {
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    background-color: rgba(255, 165, 0, 0.3);
+    color: rgb(255, 200, 100);
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-block;
+    width: fit-content;
+}
+
+.report-status-badge {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    flex-shrink: 0;
+    height: fit-content;
+}
+
+.status-pending {
+    background-color: rgba(255, 165, 0, 0.3);
+    color: rgb(255, 200, 100);
+}
+
+.status-resolved {
+    background-color: rgba(50, 205, 50, 0.3);
+    color: rgb(144, 238, 144);
+}
+
+.report-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.content-author-label {
+    font-size: 0.9rem;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.content-author-label strong {
+    font-weight: 600;
+    color: white;
+}
+
+.content-preview {
+    padding: 0.8rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-left: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+}
+
+.content-preview p {
+    font-size: 0.9rem;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.85);
+    font-style: italic;
+}
+
+.report-date {
+    font-size: 0.8rem;
+    opacity: 0.6;
+    margin: 0;
+}
+
+.report-card-actions {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.report-action-btn {
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex: 1;
+    min-width: 120px;
+}
+
+.btn-ignore {
+    background-color: rgba(128, 128, 128, 0.2);
+    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(128, 128, 128, 0.3);
+}
+
+.btn-ignore:hover {
+    background-color: rgba(128, 128, 128, 0.3);
+}
+
+.btn-remove {
+    background-color: rgba(255, 69, 69, 0.2);
+    color: rgb(255, 140, 140);
+    border: 1px solid rgba(255, 69, 69, 0.3);
+}
+
+.btn-remove:hover {
+    background-color: rgba(255, 69, 69, 0.3);
+}
+
+.btn-warn {
+    background-color: rgba(255, 165, 0, 0.2);
+    color: rgb(255, 200, 100);
+    border: 1px solid rgba(255, 165, 0, 0.3);
+}
+
+.btn-warn:hover {
+    background-color: rgba(255, 165, 0, 0.3);
+}
+
+.btn-block {
+    background-color: rgba(139, 0, 0, 0.3);
+    color: rgb(255, 100, 100);
+    border: 1px solid rgba(139, 0, 0, 0.4);
+}
+
+.btn-block:hover {
+    background-color: rgba(139, 0, 0, 0.4);
+}
+
+@media (max-width: 992px) {
+    .report-card-header {
+        flex-direction: column;
+    }
+
+    .report-status-badge {
+        align-self: flex-start;
+    }
+}
+
+@media (max-width: 768px) {
+    .reports-tabs {
+        width: 100%;
+    }
+
+    .reports-tab {
+        flex: 1;
+        text-align: center;
+        padding: 0.7rem 1rem;
+    }
+
+    .report-card-actions {
+        flex-direction: column;
+    }
+
+    .report-action-btn {
+        width: 100%;
+    }
+}
