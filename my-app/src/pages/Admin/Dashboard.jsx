@@ -1,12 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Dashboard.css";
+import axios from "axios";
+
+
 
 function Dashboard() {
+
+  const [total, setTotal] = useState({ totalUsers: 0 });
+  const [logs,setLogs] = useState({name:"",email:""})
+  useEffect(()=>{
+    axios.get("http://localhost:3000/api/auth/totals")
+    .then(res => setTotal(res.data))
+    .catch(err => console.error(err.message))
+  },[])
+
+  useEffect(()=>{
+    axios.get("http://localhost:3000/api/auth/logs")
+    .then(res => setLogs(res.data))
+    .catch(err => console.error(err.message))
+  },[])
+
   const [stats] = useState({
-    totalUsers: 1247,
-    totalPosts: 3856,
-    totalCommunities: 42,
-    pendingReports: 18
+    totalCommunities: 0,
+    pendingReports: 0
   });
 
   return (
@@ -21,7 +37,7 @@ function Dashboard() {
           <div className="stat-icon stat-icon-users"></div>
           <div className="stat-content">
             <p className="stat-label">Total Users</p>
-            <h2 className="stat-value">{stats.totalUsers}</h2>
+            <h2 className="stat-value">{total.totalUsers}</h2>
           </div>
         </div>
 
@@ -29,7 +45,7 @@ function Dashboard() {
           <div className="stat-icon stat-icon-posts"></div>
           <div className="stat-content">
             <p className="stat-label">Total Posts</p>
-            <h2 className="stat-value">{stats.totalPosts}</h2>
+            <h2 className="stat-value">{total.totalPosts}</h2>
           </div>
         </div>
 
@@ -56,7 +72,7 @@ function Dashboard() {
           <div className="activity-item">
             <div className="activity-dot"></div>
             <div className="activity-details">
-              <p className="activity-text">New user registration: <strong>John Doe</strong></p>
+              <p className="activity-text">New user registration: <strong>{logs.name}</strong> (<strong>{logs.email}</strong>)</p>
               <p className="activity-time">2 minutes ago</p>
             </div>
           </div>
