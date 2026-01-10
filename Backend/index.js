@@ -10,7 +10,7 @@ const uploads = require("./config/multer");
 const isLogged = require("./Middleware/Loggedin");
 const postModel = require("./module/post");
 const ChnagesPost = require("./controllers/ChangesPost");
-
+const Logs = require("./module/logs")
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -53,9 +53,15 @@ app.post("/postInput", isLogged, uploads.single("media"), async (req,res)=>{
     Community: [user.college],
     Post: `/uploads/Posts/${req.file.filename}`
   }).then(data => {
+    
     user.posts.push(data._id);
     console.log("Data Send");
   }).catch(err=> res.status(400).send(err.message));
+   await Logs.create({
+     user: user._id,
+     name: user.name,
+     email: user.email,
+   });
  
   await user.save();
 
