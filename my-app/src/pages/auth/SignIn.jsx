@@ -23,6 +23,7 @@ function SignIn(){
       e.preventDefault();
       setError("");
       if(email == "admin@email.com" && password == "admin123"){
+        setLoading(true);
         navigate("/admin");
       }else{
         try{
@@ -34,7 +35,6 @@ function SignIn(){
         );
         
         localStorage.setItem("user", JSON.stringify(response.data));
-          setLoading(false);
           navigate("/home");
         } catch (err){
           if(err.response && err.response.data.message){
