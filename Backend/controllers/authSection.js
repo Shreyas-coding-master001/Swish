@@ -3,7 +3,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../module/user");
 const upload = require("../config/multer");
-
+const Post = require("../module/post");
+const Logs = require("../module/logs")
 const router = express.Router();
 
 router.post("/signup", upload.single("profileImage"), async (req, res) => {
@@ -15,8 +16,25 @@ router.post("/signup", upload.single("profileImage"), async (req, res) => {
     profileImage: req.file ? `/uploads/Posts/${req.file.filename}` : null
   });
 
+  await Logs.create({
+    user: user._id,
+    name: user.name,
+    email: user.email,
+  });
+
   res.status(201).json(user);
 });
+
+
+router.get("/logs", async (req, res) => {
+  try {
+    const log = await Logs.findOne().sort({ createdAt: -1 });
+    res.status(200).json(log);
+  } catch (err) {
+    res.status(500).json({ message: "No logs found" });
+  }
+});
+
 
 router.post("/signin", async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
@@ -43,6 +61,12 @@ router.get("/users", async (req, res) => {
     res.status(500).json({ message: "No user found" }); 
   } 
 });
+
+router.get("/totals",async (req,res) => {
+    const totalUsers = await User.countDocuments();
+    const totalPosts = await Post.countDocuments();
+    res.json({totalUsers,totalPosts});
+})
 
 router.get("/profile", async (req, res) => {
   const token = req.cookies.token;
@@ -95,6 +119,7 @@ router.patch("/profile",upload.single("profileImage"),async(req,res)=>{
       res.status(500).json({ message: err.message });
   }
 })
+
 
 // router.post("/logout", (req, res) => {
 //     res.clearCookie("token");
