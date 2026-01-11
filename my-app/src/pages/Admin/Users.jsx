@@ -1,71 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Users.css";
+import axios from "axios";
+import ProfileCard from "../../Components/ProfileCard";
 
 function Users() {
   const [selectedRole, setSelectedRole] = useState("");
-  const [users] = useState([
-    {
-      id: 1,
-      name: "John Doe",
-      tag: "johndoe",
-      role: "Student",
-      college: "MIT",
-      status: "Active",
-      profileImage: null
-    },
-    {
-      id: 2,
-      name: "Alice Smith",
-      tag: "alicesmith",
-      role: "Faculty",
-      college: "Stanford",
-      status: "Active",
-      profileImage: null
-    },
-    {
-      id: 3,
-      name: "Bob Johnson",
-      tag: "bobjohnson",
-      role: "Student",
-      college: "Harvard",
-      status: "Blocked",
-      profileImage: null
-    },
-    {
-      id: 4,
-      name: "Emma Wilson",
-      tag: "emmawilson",
-      role: "Alumni",
-      college: "Yale",
-      status: "Active",
-      profileImage: null
-    },
-    {
-      id: 5,
-      name: "Mike Brown",
-      tag: "mikebrown",
-      role: "Student",
-      college: "MIT",
-      status: "Active",
-      profileImage: null
-    },
-    {
-      id: 6,
-      name: "Sarah Davis",
-      tag: "sarahdavis",
-      role: "Faculty",
-      college: "Princeton",
-      status: "Active",
-      profileImage: null
-    }
-  ]);
+  const [users,setUsers] = useState([])
+  const [showProfileCard, setShowProfileCard] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+  useEffect(() => { 
+    const fetchUsers = async () => {
+      try {
+        const res = await axios.get(
+          "http://localhost:3000/api/auth/users"
+        );
+        setUsers(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchUsers();
+  }, []);
+
+  useEffect(function(){
+    axios.get("http://localhost:3000/DisplayPost")
+    .then(res => setPosts(res.data))
+    .catch(err => console.error(err.message));
+  },[]);
 
   const handleRoleChange = (e) => {
     setSelectedRole(e.target.value);
-  };
-
-  const handleViewProfile = (userId) => {
-    console.log("View profile:", userId);
   };
 
   const handleChangeRole = (userId) => {
@@ -105,11 +69,11 @@ function Users() {
 
       <div className="users-list">
         {filteredUsers.map((user) => (
-          <div key={user.id} className="user-card">
+          <div key={user._id} className="user-card">
             <div className="user-card-left">
               <div className="user-profile-image">
                 {user.profileImage ? (
-                  <img src={user.profileImage} alt={user.name} />
+                  <img src={`http://localhost:3000${user.profileImage}`} alt={user.name} />
                 ) : (
                   <div className="user-profile-placeholder">
                     {user.name.charAt(0)}
@@ -141,7 +105,10 @@ function Users() {
               <div className="user-actions">
                 <button
                   className="user-action-btn btn-view"
-                  onClick={() => handleViewProfile(user.id)}
+                  onClick={() => {
+                    setSelectedUser(user);
+                    setShowProfileCard(true);
+                  }}
                 >
                   View Profile
                 </button>
@@ -158,12 +125,23 @@ function Users() {
                   onClick={() => handleToggleBlock(user.id, user.status)}
                 >
                   {user.status === "Active" ? "Block" : "Unblock"}
-                </button>
+                </button> 
               </div>
             </div>
           </div>
         ))}
       </div>
+
+      {showProfileCard && selectedUser && (
+        <ProfileCard
+          user={selectedUser}
+          onClose={() => {
+            setShowProfileCard(false);
+            setSelectedUser(null);
+          }}
+        />
+      )}
+
     </div>
   );
 }
