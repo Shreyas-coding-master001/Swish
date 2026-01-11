@@ -20,6 +20,7 @@ router.post("/signup", upload.single("profileImage"), async (req, res) => {
     user: user._id,
     name: user.name,
     email: user.email,
+    type: "user"
   });
 
   res.status(201).json(user);
@@ -28,8 +29,8 @@ router.post("/signup", upload.single("profileImage"), async (req, res) => {
 
 router.get("/logs", async (req, res) => {
   try {
-    const log = await Logs.findOne().sort({ createdAt: -1 });
-    res.status(200).json(log);
+    const logs = await Logs.find().sort({ createdAt: -1 }).limit(10);
+    res.status(200).json({ logs });
   } catch (err) {
     res.status(500).json({ message: "No logs found" });
   }
