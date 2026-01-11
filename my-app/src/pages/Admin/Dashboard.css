@@ -4,6 +4,11 @@
     margin: 0 auto;
 }
 
+.activity-muted {
+    color: #9ca3af;
+    font-style: italic;
+}
+
 .dashboard-header {
     margin-bottom: 2rem;
 }
