@@ -50,7 +50,11 @@ router.post("/signin", async (req, res) => {
     { expiresIn: "1d" }
   );
 
-  res.cookie("token", token, { httpOnly: true });
+res.cookie("token", token, {
+  httpOnly: true,
+  sameSite: "lax",   // 🔥 REQUIRED
+  secure: false      // 🔥 REQUIRED for localhost
+});
   res.json(user);
 });
 
@@ -120,7 +124,6 @@ router.patch("/profile",upload.single("profileImage"),async(req,res)=>{
       res.status(500).json({ message: err.message });
   }
 })
-
 
 // router.post("/logout", (req, res) => {
 //     res.clearCookie("token");
