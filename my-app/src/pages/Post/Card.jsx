@@ -4,11 +4,25 @@ import axios from "axios";
 
 // function Card({ description, media, author, likes,reposts, createdAt }){
 function Card(props){
+
+  if (!props.post || !props.post.user) {
+    return null;
+  }
+
     const [postType,setPost] = useState(true);
     const [value,setvalue] = useState("");
-    const [isliked, setlike] = useState(props.post.likedAcc.indexOf(props.post.user._id) === -1 ? false : true);
+    const userId = props.post?.user?._id || null;
+
+    const [isliked, setlike] = useState(
+      userId && props.post.likedAcc
+        ? !props.post.likedAcc.includes(userId)
+        : false
+    );
     const [isfollowed, setfollowed] = useState({
-      followed : props.post.user.followedAcc.indexOf(props.post.user._id) === -1? false : true,
+      followed:
+      props.post?.user?.followedAcc && userId
+        ? props.post.user.followedAcc.includes(userId)
+        : false
 
     });
 
@@ -32,7 +46,13 @@ function Card(props){
 
     const Followhandle =  async function(){
       
-      await axios.post(`http://localhost:3000/post/follow/${props.post.user._id}`,{}, {withCredentials: true})
+if (!userId) return;
+
+      await axios.post(
+        `http://localhost:3000/post/follow/${userId}`,
+        {},
+        { withCredentials: true }
+      )
       .then(res => setfollowed(prev => ({
         ...prev,
         followed: res.data
