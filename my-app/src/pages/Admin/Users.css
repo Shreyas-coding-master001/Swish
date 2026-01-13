@@ -85,11 +85,22 @@
     align-items: center;
     gap: 2rem;
     transition: all 0.2s ease;
+    overflow: visible;
+
 }
 
 .user-card:hover {
     background-color: rgba(255, 255, 255, 0.12);
     transform: translateY(-2px);
+}
+
+.role-dropdown {
+    pointer-events: auto;
+}
+
+.user-card {
+    position: relative;
+    z-index: 1;
 }
 
 .user-card-left {
@@ -243,6 +254,34 @@
 
 .btn-unblock:hover {
     background-color: rgba(50, 205, 50, 0.3);
+}
+
+.role-action-wrapper {
+    position: relative;
+}
+
+.role-dropdown {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    width: 150px;
+    background-color: #000064;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    z-index: 1000;
+}
+
+.role-dropdown div {
+    padding: 0.55rem 0.8rem;
+    font-size: 0.85rem;
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.role-dropdown div:hover {
+    background-color: rgba(30, 144, 255, 0.4);
 }
 
 @media (max-width: 992px) {
