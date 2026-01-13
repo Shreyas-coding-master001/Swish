@@ -42,7 +42,7 @@ function Users() {
       await axios.patch(
         `http://localhost:3000/api/admin/users/${userId}/role`,
         { role },
-        { withCredentials: true }   // 🔥 REQUIRED
+        { withCredentials: true }  
       );
 
 
