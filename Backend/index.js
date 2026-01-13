@@ -9,7 +9,8 @@ const authSection = require("./controllers/authSection")
 const uploads = require("./config/multer");
 const isLogged = require("./Middleware/Loggedin");
 const postModel = require("./module/post");
-const ChnagesPost = require("./controllers/ChangesPost");
+const ChangesPost = require("./controllers/ChangesPost");
+const adminRoutes = require("./controllers/adminController");
 const Logs = require("./module/logs")
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -27,7 +28,8 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use("/api/auth",authSection);
-app.use("/post",ChnagesPost);
+app.use("/post",ChangesPost);
+app.use("/api/admin", adminRoutes);
 
 app.use("/uploads", express.static("uploads"));
 
