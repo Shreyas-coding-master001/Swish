@@ -8,11 +8,16 @@ function Users() {
   const [users,setUsers] = useState([])
   const [showProfileCard, setShowProfileCard] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [openRoleUserId, setOpenRoleUserId] = useState(null);
+  const [userRoles, setUserRoles] = useState({});
+  const [userStatus, setUserStatus] = useState({});
+
   useEffect(() => { 
     const fetchUsers = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:3000/api/auth/users"
+          "http://localhost:3000/api/auth/users",
+          { withCredentials: true }
         );
         setUsers(res.data);
       } catch (err) {
@@ -22,23 +27,57 @@ function Users() {
     fetchUsers();
   }, []);
 
-  useEffect(function(){
-    axios.get("http://localhost:3000/DisplayPost")
-    .then(res => setPosts(res.data))
-    .catch(err => console.error(err.message));
-  },[]);
+
 
   const handleRoleChange = (e) => {
     setSelectedRole(e.target.value);
   };
 
   const handleChangeRole = (userId) => {
-    console.log("Change role:", userId);
+    setOpenRoleUserId(prev => (prev === userId ? null : userId));
   };
 
-  const handleToggleBlock = (userId, currentStatus) => {
-    console.log("Toggle block:", userId, currentStatus);
+  const handleSelectRole = async (userId, role) => {
+    try {
+      await axios.patch(
+        `http://localhost:3000/api/admin/users/${userId}/role`,
+        { role },
+        { withCredentials: true }   // 🔥 REQUIRED
+      );
+
+
+      setUserRoles(prev => ({
+        ...prev,
+        [userId]: role
+      }));
+    } catch (err) {
+      console.error(err.response?.data?.message || err.message);
+    }
+
+    setOpenRoleUserId(null);
   };
+
+
+  const handleToggleBlock = async (userId, currentStatus) => {
+    const newStatus = currentStatus === "Active" ? "Blocked" : "Active";
+
+    try {
+      await axios.patch(
+        `http://localhost:3000/api/admin/users/${userId}/status`,
+        { status: newStatus },
+        { withCredentials: true }  
+      );
+
+
+      setUserStatus(prev => ({
+        ...prev,
+        [userId]: newStatus
+      }));
+    } catch (err) {
+      console.error(err.response?.data?.message || err.message);
+    }
+  };
+
 
   const filteredUsers = selectedRole
     ? users.filter((user) => user.role === selectedRole)
@@ -60,9 +99,9 @@ function Users() {
             className="filter-select"
           >
             <option value="">All Roles</option>
-            <option value="Student">Student</option>
-            <option value="Faculty">Faculty</option>
-            <option value="Alumni">Alumni</option>
+            <option value="student">Student</option>
+            <option value="faculty">Faculty</option>
+            <option value="alumni">Alumni</option>
           </select>
         </div>
       </div>
@@ -90,43 +129,67 @@ function Users() {
 
             <div className="user-card-right">
               <div className="user-badges">
-                <span className="user-role-badge">{user.role}</span>
+                <span className="user-role-badge">
+                  {userRoles[user._id] || user.role}
+                </span>
+
                 <span
                   className={`user-status-badge ${
-                    user.status === "Active"
+                    (userStatus[user._id] || user.status) === "Active"
                       ? "status-active"
                       : "status-blocked"
                   }`}
                 >
-                  {user.status}
+                  {userStatus[user._id] || user.status}
                 </span>
+
               </div>
 
-              <div className="user-actions">
-                <button
-                  className="user-action-btn btn-view"
-                  onClick={() => {
-                    setSelectedUser(user);
-                    setShowProfileCard(true);
-                  }}
-                >
-                  View Profile
-                </button>
+            <div className="user-actions">
+              <button
+                className="user-action-btn btn-view"
+                onClick={() => {
+                  setSelectedUser(user);
+                  setShowProfileCard(true);
+                }}
+              >
+                View Profile
+              </button>
+
+              <div className="role-action-wrapper">
                 <button
                   className="user-action-btn btn-role"
-                  onClick={() => handleChangeRole(user.id)}
+                  onClick={() => handleChangeRole(user._id)}
                 >
                   Change Role
                 </button>
-                <button
-                  className={`user-action-btn ${
-                    user.status === "Active" ? "btn-block" : "btn-unblock"
-                  }`}
-                  onClick={() => handleToggleBlock(user.id, user.status)}
-                >
-                  {user.status === "Active" ? "Block" : "Unblock"}
-                </button> 
+
+                {openRoleUserId === user._id && (
+                  <div className="role-dropdown">
+                    <div onClick={() => handleSelectRole(user._id, "student")}>Student</div>
+                    <div onClick={() => handleSelectRole(user._id, "faculty")}>Faculty</div>
+                    <div onClick={() => handleSelectRole(user._id, "alumni")}>Alumni</div>
+                    <div onClick={() => handleSelectRole(user._id, "community member")}>Community Member</div>
+                  </div>
+                )}
               </div>
+
+              <button
+                className={`user-action-btn ${user.status === "Active" ? "btn-block" : "btn-unblock"}`}
+                  onClick={() =>
+                    handleToggleBlock(
+                      user._id,
+                      userStatus[user._id] || user.status
+                    )
+                  }
+              >
+                {(userStatus[user._id] || user.status) === "Active"
+                  ? "Block"
+                  : "Unblock"}
+              </button>
+            </div>
+
+
             </div>
           </div>
         ))}
