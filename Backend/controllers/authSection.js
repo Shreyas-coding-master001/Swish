@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const cookieParse = require("cookie-parser");
 const multer = require("multer");
 const path = require("path");
+const comminityModel = require("../module/comminity");
 
 router.use(express.json());  
 router.use(express.urlencoded({extended: true}));
@@ -34,7 +35,19 @@ router.post("/signup", upload.single("profileImage"), async (req, res) => {
 
         const hash = await bcrypt.hash(password, 10);
 
-        const user = await User.create({college,name,email,password: hash,role,profileImage,tag,bio,department,interests});
+        const community = await comminityModel.findOne({Community: college});
+        const user = null;
+
+        if(community !== null){
+          const user = await User.create({college,name,email,password: hash,role,profileImage,tag,bio,department,interests,
+            Community: [community._id]
+          })
+
+          community.users.push(user._id);
+          await community.save();
+        }else{
+          const user = await User.create({college,name,email,password: hash,role,profileImage,tag,bio,department,interests})
+        }
 
         res.status(201).json({
             message: "User created successfully",
@@ -43,6 +56,7 @@ router.post("/signup", upload.single("profileImage"), async (req, res) => {
 
     } catch (err) {
         console.log(err);
+
         res.status(500).json({ message: "Signup failed" });
     }
 });

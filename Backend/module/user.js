@@ -12,7 +12,8 @@ const userSchema = new mongoose.Schema({
         department : {type:String, trim: true},
         interests : {type:String, trim: true},
         posts: [{type: mongoose.Schema.Types.ObjectId,ref: "post"}],
-        followedAcc : [{type : mongoose.Schema.Types.ObjectId ,ref: "post"}]
+        followedAcc : [{type : mongoose.Schema.Types.ObjectId ,ref: "post"}],
+        Community: [{type: mongoose.Schema.Types.ObjectId, ref: "Community"}]
     },
     {timestamps: true}
 );

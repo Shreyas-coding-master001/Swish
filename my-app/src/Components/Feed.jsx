@@ -8,29 +8,44 @@ function Feed(){
 
     const [clicked,setClicked] = useState(false);
     const [description,setDescription] = useState("");
+    const [Community,setCommunity] = useState("");
+    const [user, setUsers] = useState([]);
     const [media, setMedia] = useState(null);
     const [posts, setPosts] = useState([]);
+    const [feed, setFeed] = useState(posts.user?.college || "");
 
-    // useEffect(() => {
-    // const fetchPosts = async () => {
-    //     try {
-    //         const res = await axios.get(
-    //             "http://localhost:3000/api/auth/posts",
-    //             { withCredentials: true }
-    //         );
-    //         setPosts(res.data.posts);
-    //     } catch (err) {
-    //     console.error(err);
-    //     }
-    // };
+    async function handleChange(e){
+        const communityId = e.target.value;
+    
+        try {
+            const url = communityId
+            ? `http://localhost:3000/DisplayPostCommunity/${communityId}`
+            : `http://localhost:3000/DisplayPost`;
 
-    // fetchPosts();
-    // }, []);
+            const res = await axios.get(url, { withCredentials: true });
+            console.log(res.data);
+            setPosts(res.data);
+            setCommunity(communityId);
+        } catch (err) {
+            console.error(err.message);
+        }
+    }
+
     useEffect(function(){
-            axios.get("http://localhost:3000/DisplayPost", {
-                withCredentials: true
-            })
-            .then(res => setPosts(res.data))
+        
+        axios.get("http://localhost:3000/users", {
+            withCredentials: true
+        }).then(res => {setUsers(res.data)})
+        .catch(err => console.error(err.message));
+
+        
+        axios.get("http://localhost:3000/DisplayPost", {
+            withCredentials: true
+        })
+        .then(res => {              
+            setPosts(res.data);
+            setFeed(res.data.user?.college);
+        })
             .catch(err => console.error(err.message));
     },[]);
 
@@ -71,30 +86,44 @@ function Feed(){
         const formData = new FormData();
         formData.append("description", e.target.description.value);
         formData.append("media", e.target.media.files[0]);
+        const url = Community === "" || Community === user?.college 
+            ? `http://localhost:3000/postInput`
+            :`http://localhost:3000/POstInputcommunity/${Community}`;
 
-        try {
-            const res = await axios.post(
-            "http://localhost:3000/postInput",
-            formData, {
-                withCredentials: true
-            }
-            );
-            setPosts(res.data);
-            console.log(res.data);
+        console.log(url, Community);
+        
+        //Need To work on This!!!
+        // try {
+        //     const res = await axios.post(
+        //     `http://localhost:3000/postInput`,
+        //     formData, {
+        //         withCredentials: true
+        //     }
+        //     );
+        //     setPosts(res.data);
+        //     console.log(res.data);
             
-            setClicked(prev=>{
-                if(prev) document.documentElement.style.setProperty("--x","auto");
-                else document.documentElement.style.setProperty("--x","hidden");
-                return !prev
-            });
+        //     setClicked(prev=>{
+        //         if(prev) document.documentElement.style.setProperty("--x","auto");
+        //         else document.documentElement.style.setProperty("--x","hidden");
+        //         return !prev
+        //     });
             
-        } catch (err) {
-            console.error(err);
-        }       
+        // } catch (err) {
+        //     console.error(err);
+        // }       
     };
 
 
     return <div className="post-container-feed">
+        <div className="Post-Community-Change" >
+            <h3>Current Community Feed : </h3>
+            <select name="category" onChange={handleChange}>
+                {user?.Community?.map(function(ele, idx){
+                    return(<option value={`${ele.Community}`} key={ele._id}>{ele.Community}</option>)
+                })}
+            </select>
+        </div>
         <div id={clicked? "complete": "PostInteracting"}>
             <section className="AddPost">
                 <h3>Share your story with a post</h3>
@@ -106,11 +135,25 @@ function Feed(){
             </section>
 
             <div className="Postbox">
-                {posts.map(post => (
-                <div className="Cardbox" key={post._id}>
-                    <Card post={post} />
-                </div>
-            ))}
+                {posts.map(post => {
+                    const postData = {
+                        postId: post._id,
+                        likedAcc: post.likedAcc || [],
+                        userId: post.user._id,
+                        userFollowedAcc: post.user.followedAcc || [],
+                        Comments: post.Comments || [],
+                        postMedia: post.Post,
+                        userProfileImage: post.user.profileImage,
+                        userName: post.user.name,
+                        repostsCount: post.reposts?.length || 0,
+                        description: post.Descprition
+                    };
+                    return (
+                    <div className="Cardbox" key={post._id}>
+                        <Card {...postData} />
+                    </div>
+                    );
+                })}
   
             </div>
         </div>

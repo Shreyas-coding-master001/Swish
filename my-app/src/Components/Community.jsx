@@ -1,11 +1,30 @@
-import { useState } from "react";
-import "./Community.css"
+import { useState, useEffect } from "react";
+import "./Community.css";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 function Community(){
 
     const[joined,setJoined] = useState(true);
     const[members,openMembers] = useState(false);
     const[allCommunities,showAllCommunities] = useState(false);
+    const [communityData, setComData] = useState([]);
+
+    useEffect(function(){
+        try{
+            axios.get("http://localhost:3000/community",{withCredentials: true})
+            .then(res => {
+                console.log(res.data);
+                
+                setComData(res.data);
+            });
+        }catch(err) {
+            alert("error Occured")
+            console.error(err.message);
+        }
+
+    },[])
 
     function handleOpenings(){
         openMembers(!members);
@@ -131,40 +150,34 @@ function Community(){
                 <div className="left-community-section">
                     <div className="community-name">
                         <img src="../images/logo.png" className="community-logo"/>
-                        <p>Community Name</p>
+                        <p>{communityData[0]?.Community}</p>
                     </div>
-                    <div className="community-organizers">                
-                        <div className="role-section">
-                            <img src="../images/profilelogo.png" className="role-profile"/>
-                            <div className="name-role">
-                                <p className="name-community">Person1</p>
-                                <p className="role-community">President</p>
-                            </div>
-                        </div>
-                        <div className="role-section">
-                            <img src="../images/profilelogo.png" className="role-profile"/>
-                            <div className="name-role">
-                                <p className="name-community">Person2</p>
-                                <p className="role-community">Chair Person</p>
-                            </div>
-                        </div>
-                        <div className="role-section">
-                            <img src="../images/profilelogo.png" className="role-profile"/>
-                            <div className="name-role">
-                                <p className="name-community">Person3</p>
-                                <p className="role-community">Vice President</p>
-                            </div>
-                        </div>
+                    <div className="community-organizers">
+                       {communityData[0]?.users?.map((data, idx) => {
+                            return (
+                                <div className="role-section" key={idx}>
+                                    <img
+                                        src={`http://localhost:3000${data.profileImage}`}
+                                        className="role-profile"
+                                    />
+                                    <div className="name-role">
+                                        <p className="name-community">{data.name}</p>
+                                        <p className="role-community">{data.role}</p>
+                                    </div>
+                                </div>
+                            );
+                        })}
+
                     </div>
                     <button className="view-community-button"  onClick={handleOpenings}>View members</button>
                 </div>
                 <div className="middle-community-section">
                     <div className="middle-top-community-section">
                         <div className="query-links">  
-                            <a className="link-community">Ask</a>
-                            <a className="link-community">Share</a>
-                            <a className="link-community">Discuss</a>
-                            <a className="link-community">Help</a>
+                            <Link to="/home/community/Discuss" className="LINKS-Discuss">Discuss</Link>
+                            <Link to="/home/community/Create" className="LINKS-Discuss">Create</Link>
+                            {/* <a className="link-community">Share</a>
+                            <a className="link-community">Help</a> */}
                         </div>
                         <div className="select-type">
                             <p className="type-post-community">Select type: </p>
@@ -177,15 +190,16 @@ function Community(){
                             </select>
 
                         </div>
-
                     </div>
                     <div className="middle-bottom-community-section">
-                        <div className="community-post">Post1</div>
-                        <div className="community-post">Post2</div>
-                        <div className="community-post">Post3</div>
-                        <div className="community-post">Post4</div>
-                        <div className="community-post">Post5</div>
-                        <div className="community-post">Post6</div>
+                        <Outlet />
+                        {/* {communityData.posts?.map((post, idx)=>{
+                            return(
+                                    <div className="community-post" key={idx}>
+                                        <h3>Talk with Your Members</h3>
+                                    </div>
+                            )
+                        })} */}
                     </div>
                 </div> 
                 <div className="right-community-section">
