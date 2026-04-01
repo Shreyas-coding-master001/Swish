@@ -1,40 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./Card.css";
 import axios from "axios";
 
-// function Card({ description, media, author, likes,reposts, createdAt }){
-function Card(props){
-
-  if (!props.post || !props.post.user) {
-    return null;
-  }
-
+function Card({ postId, likedAcc, userId, userFollowedAcc, Comments, postMedia, userProfileImage, userName, repostsCount, description }){
     const [postType,setPost] = useState(true);
     const [value,setvalue] = useState("");
-    const userId = props.post?.user?._id || null;
-
-    const [isliked, setlike] = useState(
-      userId && props.post.likedAcc
-        ? !props.post.likedAcc.includes(userId)
-        : false
-    );
+    const [isliked, setlike] = useState(likedAcc.indexOf(userId) === -1 ? false : true);
     const [isfollowed, setfollowed] = useState({
-      followed:
-      props.post?.user?.followedAcc && userId
-        ? props.post.user.followedAcc.includes(userId)
-        : false
-
+      followed : userFollowedAcc.indexOf(userId) === -1? false : true,
     });
 
     const [commentButton , setComments] = useState({
-      comments :  props.post.Comments,
+      comments :  Comments,
       isClcked : false
     })
-    const [likeCount, setLikeCount] = useState(props.likedAcc?.length || 0);
+    const [likeCount, setLikeCount] = useState(likedAcc?.length || 0);
 
     const Likedhandle = async () => { 
 
-        await axios.post(`http://localhost:3000/post/like/${props.post._id}`, {},{
+        await axios.post(`http://localhost:3000/post/like/${postId}`, {},{
             withCredentials: true
         }).then(res => {
             console.log(res.data);
@@ -46,13 +30,7 @@ function Card(props){
 
     const Followhandle =  async function(){
       
-if (!userId) return;
-
-      await axios.post(
-        `http://localhost:3000/post/follow/${userId}`,
-        {},
-        { withCredentials: true }
-      )
+  await axios.post(`http://localhost:3000/post/follow/${userId}`,{}, {withCredentials: true})
       .then(res => setfollowed(prev => ({
         ...prev,
         followed: res.data
@@ -69,7 +47,7 @@ if (!userId) return;
     }
 
     const handleCommentSend = async function(eve){
-      await axios.post(`http://localhost:3000/post/comment/${props.post._id}`,{value}, {withCredentials: true})
+      await axios.post(`http://localhost:3000/post/comment/${postId}`,{value}, {withCredentials: true})
       .then(res => {setComments(prev => ({
         ...prev,
         comments: res.data
@@ -78,15 +56,15 @@ if (!userId) return;
       .catch(err => console.error(err));
     }
 
-    const image = props.post.Post;
+    const image = postMedia;
     return (
     <div className="Post">
       <div className="top">
         <div className="One">
           <div className="ProfilePhoto">
-            {props.post.user.profileImage && <img src={`http://localhost:3000${props.post.user.profileImage}`} />}
+            {userProfileImage && <img src={`http://localhost:3000${userProfileImage}`} />}
           </div>
-          <h3>{props.post.user?.name}</h3>
+          <h3>{userName}</h3>
         </div>
         {
           isfollowed.followed? <button className="Unfollowbutton" onClick={Followhandle}>Unfollow</button>:
@@ -98,20 +76,14 @@ if (!userId) return;
         {postType ? (
           <img src={`http://localhost:3000${image}`} alt="Post" />
         ) : (
-          <video src={`http://localhost:3000${image}`} autoPlay muted />
+          <p>{description}</p>
         )}
-
-        <div className={isliked ? "LikedAni" : "disable"}>
-          <i className="ri-heart-fill"></i>
-        </div>
-
-        {/* <p>{createdAt}</p> */}
       </div>
 
       <div className="bottom">
         <div className="Icons">
           <div className="likeButton" onClick={Likedhandle}>
-            {isliked ? <i className="ri-heart-fill"></i> : <i className="ri-heart-line"></i>}
+            {isliked ? <i className="likeWala ri-heart-fill"></i> : <i className="ri-heart-line"></i>}
             <h6>Like</h6>
           </div>
 
@@ -127,7 +99,7 @@ if (!userId) return;
 
           <div className="repostbuttton">
             <i className="ri-arrow-go-back-line"></i>
-            <h6>{props.post.reposts?.length || 0} repost</h6>
+            <h6>{repostsCount || 0} repost</h6>
           </div>
 
         </div>
@@ -135,26 +107,26 @@ if (!userId) return;
           <p>{likeCount} Likes</p>
 
         <div className="Desciption">
-            <h3>Describe: <span>{props.post.Descprition}</span></h3>
+            <h3>Describe: <span>{description}</span></h3>
               <form onSubmit={handleCommentSend} className="One">
                 <input type="text" placeholder="Add a Comment..."  onChange={e => {
                   setvalue(e.target.value);
                 }} value={value} />
-                <button type="submit" onClick={handleCommentSend}><i className="ri-send-plane-2-fill"></i></button>
+                <button type="submit"><i className="ri-send-plane-2-fill"></i></button>
               </form>
 
             {commentButton.isClcked? 
               <div className="commentBox">
-                {props.post.Comments && props.post.Comments.length > 0 ? (
-                  props.post.Comments.map((comment, idx) => (
+                {commentButton.comments && commentButton.comments.length > 0 ? (
+                  commentButton.comments.map((comment, idx) => (
                     <div className="comment" key={idx}>
                       <div className="One">
                         <div className="ProfilePhoto">
-                          {props.post.user.profileImage && (
-                            <img src={`http://localhost:3000${props.post.user.profileImage}`} alt="" />
+                          {userProfileImage && (
+                            <img src={`http://localhost:3000${userProfileImage}`} alt="" />
                           )}
                         </div>
-                        <h3>{props.post.user?.name}</h3>
+                        <h3>{userName}</h3>
                       </div>
                       <p>{comment}</p>
                     </div>
@@ -172,4 +144,4 @@ if (!userId) return;
 );
 }   
 
-export default Card
+export default Card;

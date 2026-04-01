@@ -4,8 +4,6 @@ import Logo from "../assets/Logo-removebg-preview.png";
 import { Link } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import PostSection from "../UI Components/PostUpload";
-import Card from "../pages/Post/Card";
-import axios from "axios";
 import { useState,useEffect} from "react";
 
 function HomePage(){
@@ -57,7 +55,7 @@ function HomePage(){
             <nav id="SectionChanging">
                 <Link to="" className="LINKS">Home</Link>
                 <Link to="profile" className="LINKS">Profile</Link>
-                <Link to="community" className="LINKS">Community</Link>
+                <Link to="community" className="LINKS">Community </Link>
                 <Link to="people" className="LINKS">People</Link>
             </nav>
         </div>
@@ -75,11 +73,25 @@ function HomePage(){
                     return !prev
                 })}>Click To Post</button>
             </section>
-            {posts.map(post => (
+            {posts.map(post => {
+                const postData = {
+                    postId: post._id,
+                    likedAcc: post.likedAcc || [],
+                    userId: post.user._id,
+                    userFollowedAcc: post.user.followedAcc || [],
+                    Comments: post.Comments || [],
+                    postMedia: post.Post,
+                    userProfileImage: post.user.profileImage,
+                    userName: post.user.name,
+                    repostsCount: post.reposts?.length || 0,
+                    description: post.Descprition
+                };
+                return (
                 <div className="Postbox" key={post._id}>
-                    <Card post={post} />
+                    <Card {...postData} />
                 </div>
-            ))}
+                );
+            })}
 
             
         </div> */}

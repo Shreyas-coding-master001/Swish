@@ -10,8 +10,9 @@ const uploads = require("./config/multer");
 const isLogged = require("./Middleware/Loggedin");
 const postModel = require("./module/post");
 const ChangesPost = require("./controllers/ChangesPost");
-const adminRoutes = require("./controllers/adminController");
-const Logs = require("./module/logs")
+const community = require("./controllers/communityPage");
+const comminityModel = require("./module/comminity");
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -28,22 +29,25 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use("/api/auth",authSection);
-app.use("/post",ChangesPost);
-app.use("/api/admin", adminRoutes);
+app.use("/post", ChangesPost);
+app.use("/community", community);
 
 app.use("/uploads", express.static("uploads"));
-
-// app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/DisplayPost",isLogged, async (req,res)=>{
-  const user = req.user;
+app.get("/users", isLogged, async (req,res)=>{
+  const user = await req.user.populate("Community");
+  console.log(user);
   
-  const posts = await postModel.find({Community: user.college}).populate("user")
-  .then(data=>res.send(data.reverse()))
+  res.send(user);
+})
+
+
+app.get("/DisplayPost",isLogged, async (req,res)=>{
+  postModel.find().populate("user").then(data=>res.send(data.reverse()))
   .catch(err=>res.status(401).send(err.message));
 });
 
@@ -59,33 +63,53 @@ app.get("/showPosts", async (req, res) => {
   }
 });
 
-
-
-app.post("/postInput", isLogged, uploads.single("media"), async (req,res)=>{
+app.get("/DisplayPostCommunity/:CommunityName",isLogged, async (req,res)=>{
   const user = req.user;
-  const post = await postModel.create({
-    user: user._id,
-    Descprition: req.body.description,
-    Community: [user.college],
-    Post: `/uploads/Posts/${req.file.filename}`
-  }).then(data => {
-    
-    user.posts.push(data._id);
-    console.log("Data Send");
-  }).catch(err=> res.status(400).send(err.message));
-
-   await Logs.create({
-     user: user._id,
-     name: user.name,
-     email: user.email,
-     type: "post"
-   });
- 
-  await user.save();
-
-  res.redirect("/DisplayPost")
+  const Community = req.params.CommunityName;
+  console.log("In Display Post!!");
+  const comminityPosts = await comminityModel.findOne({Community}).populate({
+        path: "posts",
+        populate: {
+          path: "user",
+          model: "users",
+        }
+      });
+  if(!comminityPosts){res.status(404).send("Community not found")}
+  res.send(comminityPosts.posts.reverse());
 });
 
+app.post("/postInput", isLogged, uploads.single("media"), async (req,res)=>{
+  try {
+    const user = req.user;
+    
+    // Create the post
+    const post = await postModel.create({
+      user: user._id,
+      Descprition: req.body.description,
+      Community: [user.college],
+      Post: `/uploads/Posts/${req.file.filename}`
+    });
+
+    // Add post ID to user's posts
+    user.posts.push(post._id);
+    await user.save();
+
+    // Add post ID to community's posts
+    const communityData = await comminityModel.findOneAndUpdate(
+      { Community: user.college },
+      { $push: { posts: post._id } },
+      { new: true }
+    );
+
+    // Fetch and return updated posts for the community
+    const posts = await postModel.find({Community: user.college}).populate("user");
+    
+    res.send(posts.reverse());
+  } catch (err) {
+    console.error(err);
+    res.status(400).send(err.message);
+  }
+});
 
 app.get("/logout",(req,res)=>{
   res.cookie("token","")
@@ -93,3 +117,4 @@ app.get("/logout",(req,res)=>{
 })
 
 app.listen(Port, () => console.log(`Server is running ${Port}`));
+

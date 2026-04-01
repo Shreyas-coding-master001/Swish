@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema({
         posts: [{type: mongoose.Schema.Types.ObjectId,ref: "post"}],
         followedAcc : [{type : mongoose.Schema.Types.ObjectId ,ref: "post"}],
         status: {type: String,trim:true, required:true, default:"Active"},
+        Community: [{type: mongoose.Schema.Types.ObjectId, ref: "Community"}]
     },
     {timestamps: true}
 );

@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function SignUp() {
-  const navigate = useNavigate();
-
   const [sigin, setSignin] = useState(false);
   const [display, setDisplay] = useState(true);
   const [profileImage, setProfileImage] = useState(null);

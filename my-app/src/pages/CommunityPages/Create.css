@@ -1,0 +1,96 @@
+.CreateCommunity{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Page layout */
+.community-page {
+  min-height: 100vh;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Form container */
+.community-form {
+  background: #ffffff;
+  width: 100%;
+  max-width: 420px;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+.community-form h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* Inputs, textarea, select */
+.community-form input,
+.community-form textarea,
+.community-form select {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  font-size: 14px;
+  outline: none;
+  color: black;
+}
+
+.community-form textarea {
+  resize: none;
+  height: 90px;
+}
+
+/* Focus effect */
+.community-form input:focus,
+.community-form textarea:focus,
+.community-form select:focus {
+  border-color: #2563eb;
+}
+
+/* Label */
+.community-form label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  display: block;
+}
+
+/* File input */
+.community-form input[type="file"] {
+  border: none;
+  padding: 6px 0;
+}
+
+/* Button */
+.community-form button {
+  width: 100%;
+  padding: 12px;
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.community-form button:hover {
+  background: #1d4ed8;
+}
+
+.community-form button:active {
+  scale: 0.95;
+}

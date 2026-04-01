@@ -287,6 +287,20 @@
     transform: translateY(0);
 }
 
+.Post-Community-Change{
+    width: 100%;
+    background-color: black;
+    padding: 0.5rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.Post-Community-Change select{
+    color: black;
+    padding: 0.2rem;
+    font-family: 'Gill Sans', 'Gill Sans MT';
+}
+
 @media (max-width: 1200px) {
     #PostInteracting .Postbox {
         grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -295,6 +309,11 @@
 }
 
 @media (max-width: 768px) {
+
+    .post-container-feed{
+        padding-top: 5rem;
+    }
+
     #PostInteracting {
         padding: 1.5rem 1rem;
     }
@@ -368,5 +387,9 @@
     .postVisible .InputTaking button[type="submit"] {
         font-size: 1rem;
         padding: 0.9rem 1.5rem;
+    }
+
+    .post-container-feed{
+        padding-top: 6rem;
     }
 }
