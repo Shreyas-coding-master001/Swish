@@ -24,6 +24,7 @@ function Profile(){
     },[]);
 
     
+    const handleConnect = async function(){}
 
     const handleImageUpload = async (e) => {
         const file = e.target.files[0];
@@ -149,6 +150,7 @@ function Profile(){
                         )}
                     </div>
                     
+                    
                     {edit? (
                         <input className="bio-input" placeholder="Describe yourself in short" value={bio} onChange={(e) => setBio(e.target.value)}/>
                     ):(
@@ -159,11 +161,14 @@ function Profile(){
                     )} */}
                     
                     <button className="about-button">About them →</button>
+                    <button className="connect-button" 
+                    onClick={handleConnect}
+                    >Connect To Event Pulse</button>
                     
                     <div className="count-section">
                         <p className="follower">Followers: 0</p>
                         <p className="following">Following: 0</p>
-                        <p className="post-count">Post count: 0</p>
+                        <p className="post-count">Post count: {posts.length}</p>
                         <p className="community-joined">Community Joined: 0</p>
                     </div>
                     

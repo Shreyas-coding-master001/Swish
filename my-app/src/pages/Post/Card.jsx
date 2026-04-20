@@ -5,9 +5,9 @@ import axios from "axios";
 function Card({ postId, likedAcc, userId, userFollowedAcc, Comments, postMedia, userProfileImage, userName, repostsCount, description }){
     const [postType,setPost] = useState(true);
     const [value,setvalue] = useState("");
-    const [isliked, setlike] = useState(likedAcc.indexOf(userId) === -1 ? false : true);
+    const [isliked, setlike] = useState(likedAcc?.indexOf(userId) === -1 ? false : true);
     const [isfollowed, setfollowed] = useState({
-      followed : userFollowedAcc.indexOf(userId) === -1? false : true,
+      followed : userFollowedAcc?.indexOf(userId) === -1? false : true,
     });
 
     const [commentButton , setComments] = useState({

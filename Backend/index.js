@@ -12,6 +12,7 @@ const postModel = require("./module/post");
 const ChangesPost = require("./controllers/ChangesPost");
 const community = require("./controllers/communityPage");
 const comminityModel = require("./module/comminity");
+const connectionRoute = require("./routes/connectionRoute");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -31,6 +32,7 @@ app.use(cookieParser());
 app.use("/api/auth",authSection);
 app.use("/post", ChangesPost);
 app.use("/community", community);
+app.use("/api/connect" , connectionRoute);
 
 app.use("/uploads", express.static("uploads"));
 
