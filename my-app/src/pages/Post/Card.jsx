@@ -3,6 +3,9 @@ import "./Card.css";
 import axios from "axios";
 
 function Card({ postId, likedAcc, userId, userFollowedAcc, Comments, postMedia, userProfileImage, userName, repostsCount, description }){
+    // Ensure likedAcc and userFollowedAcc are arrays to avoid undefined errors
+    likedAcc = likedAcc || [];
+    userFollowedAcc = userFollowedAcc || [];
     const [postType,setPost] = useState(true);
     const [value,setvalue] = useState("");
     const [isliked, setlike] = useState(likedAcc.indexOf(userId) === -1 ? false : true);

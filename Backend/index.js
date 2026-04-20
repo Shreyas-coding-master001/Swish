@@ -12,6 +12,8 @@ const postModel = require("./module/post");
 const ChangesPost = require("./controllers/ChangesPost");
 const community = require("./controllers/communityPage");
 const comminityModel = require("./module/comminity");
+const analyticsController = require("./controllers/analyticsController");
+const adminRoutes = require("./routes/adminRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -21,7 +23,7 @@ app.set("view engine", "ejs");
 connectDB();
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: "http://localhost:5173", // change this port if cors issue found during login , means add the port no which frontend has
   credentials: true
 }));
 
@@ -31,6 +33,8 @@ app.use(cookieParser());
 app.use("/api/auth",authSection);
 app.use("/post", ChangesPost);
 app.use("/community", community);
+app.use("/api/analytics", analyticsController.getAnalytics);
+app.use("/api/admin", adminRoutes);
 
 app.use("/uploads", express.static("uploads"));
 
@@ -116,5 +120,5 @@ app.get("/logout",(req,res)=>{
   res.redirect("/");
 })
 
-app.listen(Port, () => console.log(`Server is running ${Port}`));
+app.listen(PORT, () => console.log(`Server is running ${PORT}`));
 

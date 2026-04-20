@@ -60,14 +60,30 @@ function Feed(){
         e.preventDefault();
 
         const formData = new FormData();
-        formData.append("description", e.target.description.value);
-        formData.append("media", e.target.media.files[0]);
+        formData.append("description", description);
+        if (media) {
+            formData.append("media", media);
+        }
         const url = Community === "" || Community === user?.college 
             ? `http://localhost:3000/postInput`
             :`http://localhost:3000/POstInputcommunity/${Community}`;
 
-        console.log(url, Community);
-        
+        try {
+            const res = await axios.post(url, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                },
+                withCredentials: true
+            });
+            // Update posts after successful creation
+            setPosts(res.data);
+            setDescription("");
+            setMedia(null);
+            setClicked(false);
+        } catch (err) {
+            console.error(err);
+            alert("Failed to create post: " + (err.response?.data || err.message));
+        }
     };
 
     return <div className="post-container-feed">
@@ -91,6 +107,7 @@ function Feed(){
 
             <div className="Postbox">
                 {posts.map(post => {
+                    if (!post || !post.user || !post._id) return null;
                     const postData = {
                         postId: post._id,
                         likedAcc: post.likedAcc || [],
@@ -104,9 +121,9 @@ function Feed(){
                         description: post.Descprition
                     };
                     return (
-                    <div className="Cardbox" key={post._id}>
-                        <Card {...postData} />
-                    </div>
+                        <div className="Cardbox" key={post._id}>
+                            <Card {...postData} />
+                        </div>
                     );
                 })}
             </div>
