@@ -34,12 +34,9 @@ app.use(cookieParser());
 app.use("/api/auth",authSection);
 app.use("/post", ChangesPost);
 app.use("/community", community);
-<<<<<<< HEAD
 app.use("/api/connect" , connectionRoute);
-=======
 app.use("/api/analytics", analyticsController.getAnalytics);
 app.use("/api/admin", adminRoutes);
->>>>>>> 84bcdb3be9c5f8d6bb6e0126997673a4d9231563
 
 app.use("/uploads", express.static("uploads"));
 
