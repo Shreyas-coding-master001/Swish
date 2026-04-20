@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 async function Loggedin(req, res, next) {
   try {
     const token = req.cookies.token;
+    console.log("Incoming token:", token);
 
     if (!token) {
         console.log(req.cookies);
