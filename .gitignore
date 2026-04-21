@@ -51,8 +51,10 @@ lerna-debug.log*
 .vscode/
 .idea/
 .DS_Store
-.env
 
+#env file
+.env
+.env/*
 Backend/.env
 Frontend/.env
 
